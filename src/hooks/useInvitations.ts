@@ -7,7 +7,7 @@ import {
   deleteInvitation,
   updateInvitation,
 } from '@/api/invitations';
-import type { CreateInvitationDto, UpdateInvitationDto } from '@/types/invitation';
+import type { CreateInvitationDto, UpdateInvitationDto } from '@camellia/shared-types';
 import { useAuthStore } from '@/store/authStore';
 
 export const useInvitations = () => {

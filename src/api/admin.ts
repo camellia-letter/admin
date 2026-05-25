@@ -1,5 +1,5 @@
 import apiClient from './client';
-import type { PrintInvitationConfig } from '@/types/invitation';
+import type { PrintInvitationConfig } from '@camellia/shared-types';
 
 export interface AdminInvitation {
   id: string;

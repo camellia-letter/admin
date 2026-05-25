@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { User } from '@/types/invitation';
+import type { User } from '@camellia/shared-types';
 
 interface AuthState {
   user: User | null;

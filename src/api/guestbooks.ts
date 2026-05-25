@@ -1,5 +1,5 @@
 import apiClient from './client';
-import type { GuestBook, UpdateGuestBookDto, PaginatedResponse } from '@/types/invitation';
+import type { GuestBook, UpdateGuestBookDto, PaginatedResponse } from '@camellia/shared-types';
 
 export const getGuestbooksForAdmin = async (invitationId: string): Promise<GuestBook[]> => {
   const { data } = await apiClient.get<PaginatedResponse<GuestBook>>(

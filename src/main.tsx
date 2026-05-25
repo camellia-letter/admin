@@ -6,7 +6,7 @@ import { MantineProvider, Flex, Stack, Title, Text, Button, Group, Anchor } from
 import { Notifications } from '@mantine/notifications';
 import { DatesProvider } from '@mantine/dates';
 import { IconAlertTriangle } from '@tabler/icons-react';
-import { theme } from '@/types/invitation';
+import { theme } from '@/styles/theme';
 import { AuthProvider } from './components/AuthProvider';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { PageSkeleton } from './components/Skeleton';

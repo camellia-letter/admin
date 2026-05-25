@@ -1,4 +1,4 @@
-import type { UpdateInvitationDto, InvitationBlock } from '@/types/invitation';
+import type { UpdateInvitationDto, InvitationBlock } from '@camellia/shared-types';
 import { getThemeStyles, withAlpha } from './themeUtils';
 import {
   PreviewMessageBlock,

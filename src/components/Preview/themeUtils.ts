@@ -1,5 +1,5 @@
-import type { InvitationTheme, FontFamily } from '@/types/invitation';
-import { DEFAULT_THEME } from '@/types/invitation';
+import type { InvitationTheme, FontFamily } from '@camellia/shared-types';
+import { DEFAULT_THEME } from '@camellia/shared-types';
 
 // 색상을 투명도와 함께 반환
 export function withAlpha(color: string, alpha: number): string {

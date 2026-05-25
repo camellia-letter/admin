@@ -1,4 +1,4 @@
-import type { BlockType } from '@/types/invitation';
+import type { BlockType } from '@camellia/shared-types';
 import { Menu, Button, Group, Text, Box } from '@mantine/core';
 import { IconPlus, IconChevronDown } from '@tabler/icons-react';
 import {

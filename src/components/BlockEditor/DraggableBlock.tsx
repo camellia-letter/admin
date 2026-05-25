@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import type { InvitationBlock, BlockDataByType } from '@/types/invitation';
+import type { InvitationBlock, BlockDataByType } from '@camellia/shared-types';
 import { DragHandleIcon } from '@/components/ui/icons';
 import { getBlockLabel } from '@/utils/blockHelpers';
 import { HeroBlockEditor } from '@/components/BlockEditor/editors/HeroBlockEditor';

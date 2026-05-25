@@ -1,5 +1,5 @@
 import { Stack, TextInput, Textarea } from '@mantine/core';
-import type { MessageBlockData } from '@/types/invitation';
+import type { MessageBlockData } from '@camellia/shared-types';
 
 interface MessageBlockEditorProps {
   blockId: string;

@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getGuestbooksForAdmin, updateGuestbook, deleteGuestbook } from '@/api/guestbooks';
-import type { UpdateGuestBookDto } from '@/types/invitation';
+import type { UpdateGuestBookDto } from '@camellia/shared-types';
 
 export const useGuestbooks = (invitationId: string) => {
   return useQuery({

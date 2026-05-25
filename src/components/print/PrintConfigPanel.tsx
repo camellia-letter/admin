@@ -6,7 +6,7 @@ import type {
   PaperSize,
   QRCodeSize,
   QRCodePosition,
-} from '@/types/invitation';
+} from '@camellia/shared-types';
 import {
   Stack,
   Paper,

@@ -4,7 +4,7 @@ import type {
   RsvpBlockData,
   TransportType,
   ParentsBlockData,
-} from '@/types/invitation';
+} from '@camellia/shared-types';
 import { withAlpha } from './themeUtils';
 
 interface ThemeStyles {

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Paper, UnstyledButton, Flex, Text, Box } from '@mantine/core';
-import type { InvitationBlock, BlockDataByType, BlockType } from '@/types/invitation';
+import type { InvitationBlock, BlockDataByType, BlockType } from '@camellia/shared-types';
 import { ChevronDownIcon } from '@/components/ui/icons';
 import { getBlockLabel } from '@/utils/blockHelpers';
 import { HeroBlockEditor } from '@/components/BlockEditor/editors/HeroBlockEditor';

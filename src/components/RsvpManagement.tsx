@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import { useRsvps, useRsvpStats, useDeleteRsvp } from '@/hooks/useRsvps';
 import { AppAlertDialog } from '@/components/ui/AppAlertDialog';
-import type { Rsvp } from '@/types/invitation';
+import type { Rsvp } from '@camellia/shared-types';
 
 interface RsvpManagementProps {
   invitationId: string;

@@ -1,6 +1,6 @@
 import { Alert, Text } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
-import type { InfoBlockData } from '@/types/invitation';
+import type { InfoBlockData } from '@camellia/shared-types';
 
 interface InfoBlockEditorProps {
   blockId: string;
