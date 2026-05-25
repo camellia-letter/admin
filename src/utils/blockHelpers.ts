@@ -1,4 +1,4 @@
-import type { InvitationBlock, BlockType, BlockDataByType } from '@camellia/shared-types';
+import type { InvitationBlock, BlockType, BlockDataByType } from '@camellia-letter/shared-types';
 
 /**
  * 블록 타입별 기본 데이터를 생성합니다

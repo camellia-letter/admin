@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useInvitations, useInvitation, useCreateInvitation } from './useInvitations';
 import * as invitationsApi from '../api/invitations';
-import type { Invitation } from '@camellia/shared-types';
+import type { Invitation } from '@camellia-letter/shared-types';
 import React from 'react';
 
 // API 모킹

@@ -1,5 +1,5 @@
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import type { InvitationBlock, BlockDataByType } from '@camellia/shared-types';
+import type { InvitationBlock, BlockDataByType } from '@camellia-letter/shared-types';
 import { DraggableBlock } from './DraggableBlock';
 import { Stack, Paper, Center, Text } from '@mantine/core';
 

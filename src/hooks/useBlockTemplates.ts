@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { BlockType, BlockDataByType } from '@camellia/shared-types';
+import type { BlockType, BlockDataByType } from '@camellia-letter/shared-types';
 
 export interface BlockTemplate {
   id: string;

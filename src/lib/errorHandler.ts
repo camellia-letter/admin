@@ -1,5 +1,10 @@
 import { AxiosError } from 'axios';
-import { ApiErrorResponse, ErrorCode, ERROR_MESSAGES, isRetryableError } from '@camellia/shared-types';
+import {
+  ApiErrorResponse,
+  ErrorCode,
+  ERROR_MESSAGES,
+  isRetryableError,
+} from '@camellia-letter/shared-types';
 
 export interface ParsedError {
   code: ErrorCode;

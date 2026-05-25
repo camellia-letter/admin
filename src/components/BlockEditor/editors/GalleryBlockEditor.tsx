@@ -18,7 +18,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { DeleteIcon, DragHandleIcon } from '@/components/ui/icons';
 import { ImageUploader } from '@/components/ui/ImageUploader';
-import type { GalleryBlockData, GalleryImage } from '@camellia/shared-types';
+import type { GalleryBlockData, GalleryImage } from '@camellia-letter/shared-types';
 
 interface GalleryBlockEditorProps {
   blockId: string;

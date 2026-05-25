@@ -1,5 +1,5 @@
 import { Stack, TextInput } from '@mantine/core';
-import type { HeroBlockData } from '@camellia/shared-types';
+import type { HeroBlockData } from '@camellia-letter/shared-types';
 import { ImageUploader } from '@/components/ui/ImageUploader';
 
 interface HeroBlockEditorProps {

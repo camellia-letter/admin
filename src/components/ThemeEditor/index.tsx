@@ -7,7 +7,7 @@ import {
   GradientConfig,
   THEME_PRESETS,
   DEFAULT_THEME,
-} from '@camellia/shared-types';
+} from '@camellia-letter/shared-types';
 import { checkThemeContrast, getContrastGrade } from '@/utils/colorContrast';
 import { useToast } from '@/hooks/useNotifications';
 import {

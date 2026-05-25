@@ -5,7 +5,7 @@ import type {
   UpdateInvitationDto,
   InvitationStats,
   PaginatedResponse,
-} from '@camellia/shared-types';
+} from '@camellia-letter/shared-types';
 
 export const getInvitations = async (): Promise<Invitation[]> => {
   const { data } = await apiClient.get<PaginatedResponse<Invitation>>('/api/invitations');

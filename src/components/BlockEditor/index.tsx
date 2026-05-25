@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { InvitationBlock, BlockType, BlockDataByType } from '@camellia/shared-types';
+import type { InvitationBlock, BlockType, BlockDataByType } from '@camellia-letter/shared-types';
 import { BlockSelector } from './BlockSelector';
 import { BlockEditPanel } from './BlockEditPanel';
 import { createDefaultBlock } from '@/utils/blockHelpers';

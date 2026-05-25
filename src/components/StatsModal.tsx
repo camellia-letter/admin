@@ -2,7 +2,7 @@ import { Card, Text, SimpleGrid, Button, Box, Group, Stack } from '@mantine/core
 import { useInvitationStats } from '@/hooks/useInvitations';
 import { StatsSkeleton } from '@/components/Skeleton';
 import { AppDialog } from '@/components/ui/AppDialog';
-import type { Invitation } from '@camellia/shared-types';
+import type { Invitation } from '@camellia-letter/shared-types';
 
 interface StatsModalProps {
   isOpen: boolean;

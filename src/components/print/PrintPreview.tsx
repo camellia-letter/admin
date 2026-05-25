@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import type { PrintInvitationConfig } from '@camellia/shared-types';
+import type { PrintInvitationConfig } from '@camellia-letter/shared-types';
 import { generatePrintPDFBlob } from '@/api/print-invitation';
 import { Paper, Title, Loader, Alert, Stack, Flex, Text, Center, Box } from '@mantine/core';
 

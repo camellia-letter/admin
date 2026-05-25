@@ -18,7 +18,11 @@ import { DateTimePicker } from '@mantine/dates';
 import { IconArrowLeft, IconEye } from '@tabler/icons-react';
 import { useInvitation, useUpdateInvitation } from '@/hooks/useInvitations';
 import { checkSlugAvailability, suggestSlug } from '@/api/invitations';
-import type { UpdateInvitationDto, InvitationBlock, InvitationTheme } from '@camellia/shared-types';
+import type {
+  UpdateInvitationDto,
+  InvitationBlock,
+  InvitationTheme,
+} from '@camellia-letter/shared-types';
 import { BlockEditor } from '@/components/BlockEditor';
 import { ThemeEditor } from '@/components/ThemeEditor';
 import { InvitationPreview } from '@/components/Preview';

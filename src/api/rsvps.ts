@@ -1,5 +1,5 @@
 import apiClient from './client';
-import type { Rsvp, RsvpStats, PaginatedResponse } from '@camellia/shared-types';
+import type { Rsvp, RsvpStats, PaginatedResponse } from '@camellia-letter/shared-types';
 
 export const getRsvps = async (invitationId: string): Promise<Rsvp[]> => {
   const { data } = await apiClient.get<PaginatedResponse<Rsvp>>(

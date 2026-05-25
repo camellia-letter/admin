@@ -1,5 +1,5 @@
 import { Stack, Text, TextInput, Textarea, Checkbox } from '@mantine/core';
-import type { RsvpBlockData } from '@camellia/shared-types';
+import type { RsvpBlockData } from '@camellia-letter/shared-types';
 
 interface RsvpBlockEditorProps {
   blockId: string;

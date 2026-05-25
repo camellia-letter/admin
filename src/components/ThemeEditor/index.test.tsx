@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeEditor } from './index';
-import { DEFAULT_THEME } from '@camellia/shared-types';
+import { DEFAULT_THEME } from '@camellia-letter/shared-types';
 
 // Toast mock
 vi.mock('../ui/Toast', () => ({

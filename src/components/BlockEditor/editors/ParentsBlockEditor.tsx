@@ -1,5 +1,5 @@
 import { Stack, Text, TextInput, Paper, Flex } from '@mantine/core';
-import type { ParentsBlockData } from '@camellia/shared-types';
+import type { ParentsBlockData } from '@camellia-letter/shared-types';
 
 interface ParentsBlockEditorProps {
   blockId: string;

@@ -28,7 +28,7 @@ import { InvitationCardSkeleton, StatsSkeleton } from '@/components/Skeleton';
 import { useAuthStore } from '@/store/authStore';
 import { useToast } from '@/hooks/useNotifications';
 import { AppAlertDialog } from '@/components/ui/AppAlertDialog';
-import type { Invitation } from '@camellia/shared-types';
+import type { Invitation } from '@camellia-letter/shared-types';
 
 const StatsModal = lazy(() => import('@/components/StatsModal'));
 

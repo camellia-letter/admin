@@ -11,7 +11,7 @@ import {
   Switch,
 } from '@mantine/core';
 import { DeleteIcon, AddIcon, CopyIcon } from '@/components/ui/icons';
-import type { AccountInfo, AccountBlockData } from '@camellia/shared-types';
+import type { AccountInfo, AccountBlockData } from '@camellia-letter/shared-types';
 
 interface AccountBlockEditorProps {
   blockId: string;

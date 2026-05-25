@@ -12,7 +12,11 @@ import {
   Box,
 } from '@mantine/core';
 import { DeleteIcon, AddIcon, CopyIcon } from '@/components/ui/icons';
-import type { TransportItem, TransportType, TransportBlockData } from '@camellia/shared-types';
+import type {
+  TransportItem,
+  TransportType,
+  TransportBlockData,
+} from '@camellia-letter/shared-types';
 
 interface TransportBlockEditorProps {
   blockId: string;

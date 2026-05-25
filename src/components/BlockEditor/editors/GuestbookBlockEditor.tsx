@@ -1,6 +1,6 @@
 import { Alert, Text } from '@mantine/core';
 import { IconBook } from '@tabler/icons-react';
-import type { GuestbookBlockData } from '@camellia/shared-types';
+import type { GuestbookBlockData } from '@camellia-letter/shared-types';
 
 interface GuestbookBlockEditorProps {
   blockId: string;

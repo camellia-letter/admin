@@ -1,6 +1,6 @@
 import { Alert, Text } from '@mantine/core';
 import { IconMap } from '@tabler/icons-react';
-import type { MapBlockData } from '@camellia/shared-types';
+import type { MapBlockData } from '@camellia-letter/shared-types';
 
 interface MapBlockEditorProps {
   blockId: string;

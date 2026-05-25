@@ -14,7 +14,7 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import type { BlockType } from '@camellia/shared-types';
+import type { BlockType } from '@camellia-letter/shared-types';
 import {
   HeaderIcon,
   ImageIcon,
