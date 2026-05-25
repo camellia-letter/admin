@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#ffffff" stroke="#f0f0f0" stroke-width="2"/>
+
+  <!-- Camellia petals -->
+  <g transform="translate(50, 50)">
+    <!-- Outer petals (5 petals) -->
+    <path d="M 0,-25 Q 8,-20 10,-12 Q 8,-4 0,-2 Q -8,-4 -10,-12 Q -8,-20 0,-25 Z"
+          fill="#e63946" transform="rotate(0)"/>
+    <path d="M 0,-25 Q 8,-20 10,-12 Q 8,-4 0,-2 Q -8,-4 -10,-12 Q -8,-20 0,-25 Z"
+          fill="#e63946" transform="rotate(72)"/>
+    <path d="M 0,-25 Q 8,-20 10,-12 Q 8,-4 0,-2 Q -8,-4 -10,-12 Q -8,-20 0,-25 Z"
+          fill="#e63946" transform="rotate(144)"/>
+    <path d="M 0,-25 Q 8,-20 10,-12 Q 8,-4 0,-2 Q -8,-4 -10,-12 Q -8,-20 0,-25 Z"
+          fill="#e63946" transform="rotate(216)"/>
+    <path d="M 0,-25 Q 8,-20 10,-12 Q 8,-4 0,-2 Q -8,-4 -10,-12 Q -8,-20 0,-25 Z"
+          fill="#e63946" transform="rotate(288)"/>
+
+    <!-- Inner petals -->
+    <path d="M 0,-15 Q 5,-12 6,-7 Q 5,-3 0,-1 Q -5,-3 -6,-7 Q -5,-12 0,-15 Z"
+          fill="#dc2f3d" transform="rotate(36)"/>
+    <path d="M 0,-15 Q 5,-12 6,-7 Q 5,-3 0,-1 Q -5,-3 -6,-7 Q -5,-12 0,-15 Z"
+          fill="#dc2f3d" transform="rotate(108)"/>
+    <path d="M 0,-15 Q 5,-12 6,-7 Q 5,-3 0,-1 Q -5,-3 -6,-7 Q -5,-12 0,-15 Z"
+          fill="#dc2f3d" transform="rotate(180)"/>
+    <path d="M 0,-15 Q 5,-12 6,-7 Q 5,-3 0,-1 Q -5,-3 -6,-7 Q -5,-12 0,-15 Z"
+          fill="#dc2f3d" transform="rotate(252)"/>
+    <path d="M 0,-15 Q 5,-12 6,-7 Q 5,-3 0,-1 Q -5,-3 -6,-7 Q -5,-12 0,-15 Z"
+          fill="#dc2f3d" transform="rotate(324)"/>
+
+    <!-- Center -->
+    <circle cx="0" cy="0" r="8" fill="#ffd23f"/>
+
+    <!-- Stamen details -->
+    <circle cx="-3" cy="-2" r="1.5" fill="#ffb703"/>
+    <circle cx="3" cy="-2" r="1.5" fill="#ffb703"/>
+    <circle cx="0" cy="3" r="1.5" fill="#ffb703"/>
+    <circle cx="-2" cy="2" r="1" fill="#ff9505"/>
+    <circle cx="2" cy="2" r="1" fill="#ff9505"/>
+    <circle cx="0" cy="-1" r="1" fill="#ff9505"/>
+  </g>
+
+  <!-- Leaves (optional, subtle) -->
+  <path d="M 20,75 Q 15,70 15,65 Q 15,60 20,58"
+        fill="#2d6a4f" opacity="0.7" stroke="#1b4332" stroke-width="0.5"/>
+  <path d="M 80,75 Q 85,70 85,65 Q 85,60 80,58"
+        fill="#2d6a4f" opacity="0.7" stroke="#1b4332" stroke-width="0.5"/>
+</svg>
