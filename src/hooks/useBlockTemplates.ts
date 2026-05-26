@@ -22,8 +22,8 @@ export function useBlockTemplates() {
       if (stored) {
         setTemplates(JSON.parse(stored));
       }
-    } catch (error) {
-      console.error('Failed to load templates:', error);
+    } catch {
+      // Failed to load templates
     }
   }, []);
 
@@ -48,8 +48,8 @@ export function useBlockTemplates() {
         const updated = [...prev, newTemplate];
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        } catch (error) {
-          console.error('Failed to save template:', error);
+        } catch {
+          // Failed to save template
         }
         return updated;
       });
@@ -65,8 +65,8 @@ export function useBlockTemplates() {
       const updated = prev.filter((t) => t.id !== id);
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      } catch (error) {
-        console.error('Failed to delete template:', error);
+      } catch {
+        // Failed to delete template
       }
       return updated;
     });
@@ -78,8 +78,8 @@ export function useBlockTemplates() {
       const updated = prev.map((t) => (t.id === id ? { ...t, name: newName } : t));
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      } catch (error) {
-        console.error('Failed to rename template:', error);
+      } catch {
+        // Failed to rename template
       }
       return updated;
     });

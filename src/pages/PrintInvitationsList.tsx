@@ -59,9 +59,8 @@ export default function PrintInvitationsList() {
       setInvitations(response.data.data);
       setTotal(response.data.total);
       setTotalPages(response.data.totalPages);
-    } catch (err) {
+    } catch {
       setError('청첩장 목록을 불러오는데 실패했습니다.');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -79,8 +78,8 @@ export default function PrintInvitationsList() {
     try {
       const response = await getPrintInvitationStats();
       setStats(response.data);
-    } catch (err) {
-      console.error('통계 로드 실패:', err);
+    } catch {
+      // Failed to load stats
     }
   };
 

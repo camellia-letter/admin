@@ -59,8 +59,6 @@ const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
       isCancelled = true;
       clearTimeout(timeoutId);
     };
-    // pdfUrl은 의도적으로 제외 (무한 루프 방지)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invitationId, config]);
 
   // 컴포넌트 언마운트 시 URL 해제

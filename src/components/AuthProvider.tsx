@@ -28,8 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
           searchParams.delete('jwt');
           setSearchParams(searchParams, { replace: true });
-        } catch (error) {
-          console.error('Failed to authenticate:', error);
+        } catch {
           logout();
         }
       }

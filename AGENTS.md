@@ -25,7 +25,7 @@ Architecture consistency is critical.
 
 ## 🚨 Non-Negotiable Rules
 
-- Follow `WORK_RULES.md` strictly
+- Follow `docs/WORK_RULES.md` strictly
 - Do NOT change architecture
 - Do NOT refactor unless explicitly requested
 - Do NOT introduce new patterns

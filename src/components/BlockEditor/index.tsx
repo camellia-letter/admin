@@ -163,7 +163,6 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
     const newBlocks = buildBlocks();
     prevBlocksRef.current = newBlocks;
     onChange(newBlocks);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabledBlocks, blockData, blockOrder]);
 
   // 상태를 히스토리에 저장
