@@ -427,7 +427,7 @@ export default function Editor() {
                   />
                   {invitation && (
                     <Text size="sm" c="dimmed">
-                      RSVP 조회 페이지: {window.location.origin}/rsvp-list/
+                      RSVP 조회 페이지: {import.meta.env.VITE_WEB_URL || 'http://localhost:4000'}/rsvp-list/
                       {invitation.slug || invitation.id}
                     </Text>
                   )}
