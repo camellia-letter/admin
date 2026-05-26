@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm install && pnpm build",
+  "buildCommand": "npm install && npm build",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
