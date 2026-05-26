@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "preinstall": "if [ ! -f .npmrc ] && [ -n \"$NPM_TOKEN\" ]; then printf \"//npm.pkg.github.com/:_authToken=%s\\n@camellia-letter:registry=https://npm.pkg.github.com\\n\" \"$NPM_TOKEN\" > .npmrc; fi",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",

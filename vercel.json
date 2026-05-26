@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm install && npm build",
+  "installCommand": "bash setup-npmrc.sh && npm install",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
