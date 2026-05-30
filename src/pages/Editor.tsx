@@ -155,7 +155,18 @@ export default function Editor() {
   };
 
   const handleBlocksChange = useCallback((blocks: InvitationBlock[]) => {
-    setFormData((prev: UpdateInvitationDto) => ({ ...prev, blocks }));
+    setFormData((prev: UpdateInvitationDto) => {
+      // MAP 블록의 좌표를 venueLat, venueLng에 동기화
+      const mapBlock = blocks.find((block) => block.type === 'MAP');
+      const mapData = mapBlock?.data as { lat?: number; lng?: number } | undefined;
+
+      return {
+        ...prev,
+        blocks,
+        venueLat: mapData?.lat ?? prev.venueLat,
+        venueLng: mapData?.lng ?? prev.venueLng,
+      };
+    });
   }, []);
 
   const handleThemeChange = useCallback((theme: InvitationTheme) => {
