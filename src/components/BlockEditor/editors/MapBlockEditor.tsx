@@ -155,6 +155,25 @@ export const MapBlockEditor = ({ data, onChange }: MapBlockEditorProps) => {
           </Text>
         </Alert>
       )}
+
+      <Stack gap="xs">
+        <Text size="sm" fw={500}>
+          길찾기 도착지명 (선택)
+        </Text>
+        <TextInput
+          value={data.destinationName || ''}
+          onChange={(e) =>
+            onChange({
+              ...data,
+              destinationName: e.target.value.trim() || undefined,
+            })
+          }
+          placeholder="예: 더링크서울 5층"
+        />
+        <Text size="xs" c="dimmed">
+          카카오/네이버 길찾기 버튼에 표시될 이름입니다. 미입력 시 예식장 이름이 사용됩니다.
+        </Text>
+      </Stack>
     </Stack>
   );
 };
