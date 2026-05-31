@@ -23,10 +23,7 @@ interface AddBlockMenuProps {
 const blockTypes: BlockType[] = [
   'HEADER',
   'HERO',
-<<<<<<< HEAD
-=======
   'WEDDING_SUMMARY',
->>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
   'MESSAGE',
   'INFO',
   'PARENTS',
@@ -41,10 +38,7 @@ const blockTypes: BlockType[] = [
 const blockIcons: Record<BlockType, React.ComponentType<{ className?: string }>> = {
   HEADER: HeaderIcon,
   HERO: ImageIcon,
-<<<<<<< HEAD
-=======
   WEDDING_SUMMARY: InfoIcon,
->>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
   MESSAGE: TextIcon,
   INFO: InfoIcon,
   PARENTS: ParentsIcon,
