@@ -21,6 +21,11 @@ function getDefaultBlockData(type: BlockType): BlockDataByType[BlockType] {
       };
     case 'INFO':
       return {}; // 기본 정보에서 자동으로 표시
+<<<<<<< HEAD
+=======
+    case 'WEDDING_SUMMARY':
+      return {}; // 기본 정보에서 자동으로 표시
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
     case 'PARENTS':
       return {
         groomFatherName: '',
@@ -97,6 +102,10 @@ export function getBlockLabel(type: BlockType): string {
   const labels: Record<BlockType, string> = {
     HEADER: '헤더',
     HERO: '메인 이미지',
+<<<<<<< HEAD
+=======
+    WEDDING_SUMMARY: '예식 요약',
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
     MESSAGE: '인사말',
     INFO: '예식 정보',
     PARENTS: '부모님 성함',
@@ -117,6 +126,10 @@ export function getBlockDescription(type: BlockType): string {
   const descriptions: Record<BlockType, string> = {
     HEADER: '신랑 신부 이름과 타이틀을 표시합니다',
     HERO: '상단 메인 이미지를 추가합니다',
+<<<<<<< HEAD
+=======
+    WEDDING_SUMMARY: '예식 요약 정보를 간단히 표시합니다',
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
     MESSAGE: '신랑 신부의 인사말을 작성합니다',
     INFO: '예식 일시와 장소 정보를 표시합니다',
     PARENTS: '양가 부모님 성함을 표시합니다',
@@ -172,6 +185,10 @@ export function validateBlockData(block: InvitationBlock): { valid: boolean; err
 
     case 'HEADER':
     case 'INFO':
+<<<<<<< HEAD
+=======
+    case 'WEDDING_SUMMARY':
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
     case 'PARENTS':
     case 'MAP':
     case 'GUESTBOOK':

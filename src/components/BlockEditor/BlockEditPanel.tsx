@@ -4,6 +4,10 @@ import type { InvitationBlock, BlockDataByType, BlockType } from '@camellia-lett
 import { ChevronDownIcon } from '@/components/ui/icons';
 import { getBlockLabel } from '@/utils/blockHelpers';
 import { HeroBlockEditor } from '@/components/BlockEditor/editors/HeroBlockEditor';
+<<<<<<< HEAD
+=======
+import { WeddingSummaryBlockEditor } from '@/components/BlockEditor/editors/WeddingSummaryBlockEditor';
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
 import { MessageBlockEditor } from '@/components/BlockEditor/editors/MessageBlockEditor';
 import { InfoBlockEditor } from '@/components/BlockEditor/editors/InfoBlockEditor';
 import { MapBlockEditor } from '@/components/BlockEditor/editors/MapBlockEditor';
@@ -36,6 +40,11 @@ function BlockEditPanelComponent({
     switch (block.type) {
       case 'HERO':
         return <HeroBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />;
+<<<<<<< HEAD
+=======
+      case 'WEDDING_SUMMARY':
+        return <WeddingSummaryBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />;
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
       case 'MESSAGE':
         return (
           <MessageBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />

@@ -10,6 +10,7 @@ import {
   PreviewGuestbookBlock,
   PreviewRsvpBlock,
   PreviewHeroBlock,
+  PreviewWeddingSummaryBlock,
   PreviewParentsBlock,
 } from './PreviewBlocks';
 
@@ -81,6 +82,17 @@ function BlockRenderer({
         switch (block.type) {
           case 'HERO':
             return <PreviewHeroBlock key={block.id} data={block.data} theme={theme} />;
+          case 'WEDDING_SUMMARY':
+            return (
+              <PreviewWeddingSummaryBlock
+                key={block.id}
+                groomName={formData.groomName || ''}
+                brideName={formData.brideName || ''}
+                weddingDate={formData.weddingDate || new Date().toISOString()}
+                venue={formData.venue || ''}
+                theme={theme}
+              />
+            );
           case 'MESSAGE':
             return <PreviewMessageBlock key={block.id} data={block.data} theme={theme} />;
           case 'INFO':

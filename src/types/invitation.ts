@@ -91,6 +91,7 @@ export interface InvitationTheme {
 export type BlockType =
   | 'HEADER' // 헤더 (신랑 & 신부 이름)
   | 'HERO' // 메인 이미지
+  | 'WEDDING_SUMMARY' // 예식 요약
   | 'MESSAGE' // 인사말
   | 'INFO' // 예식 정보
   | 'PARENTS' // 부모님 성함
@@ -169,6 +170,11 @@ export interface InfoBlockData {
   venueAddress?: string;
 }
 
+// Wedding Summary 블록 데이터 타입
+export interface WeddingSummaryBlockData {
+  // 기본 정보에서 자동으로 표시
+}
+
 // Parents 블록 데이터 타입
 export interface ParentsBlockData {
   groomFatherName?: string;
@@ -208,6 +214,7 @@ export interface RsvpBlockData {
 export interface BlockDataByType {
   HEADER: HeaderBlockData;
   HERO: HeroBlockData;
+  WEDDING_SUMMARY: WeddingSummaryBlockData;
   MESSAGE: MessageBlockData;
   INFO: InfoBlockData;
   PARENTS: ParentsBlockData;

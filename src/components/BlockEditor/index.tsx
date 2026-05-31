@@ -69,6 +69,10 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
     const allTypes: BlockType[] = [
       'HEADER',
       'HERO',
+<<<<<<< HEAD
+=======
+      'WEDDING_SUMMARY',
+>>>>>>> be29520 (Feature(apps-admin): WEDDING_SUMMARY 블록 추가)
       'MESSAGE',
       'INFO',
       'PARENTS',
