@@ -58,6 +58,11 @@ function getDefaultBlockData(type: BlockType): BlockDataByType[BlockType] {
         showMealOption: false,
         showGuestCount: true,
       };
+    case 'SNAP_UPLOAD':
+      return {
+        title: '스냅 업로드',
+        description: '하객들이 촬영한 사진을 업로드할 수 있습니다.',
+      };
   }
 }
 
@@ -109,6 +114,7 @@ export function getBlockLabel(type: BlockType): string {
     ACCOUNT: '계좌 정보',
     TRANSPORT: '교통 안내',
     RSVP: '참석 여부',
+    SNAP_UPLOAD: '스냅 업로드',
   };
   return labels[type];
 }
@@ -130,6 +136,7 @@ export function getBlockDescription(type: BlockType): string {
     ACCOUNT: '축의금 계좌 정보를 표시합니다',
     TRANSPORT: '지하철, 버스, 주차 등 교통 안내를 추가합니다',
     RSVP: '하객들의 참석 여부를 수집합니다',
+    SNAP_UPLOAD: '하객들이 촬영한 사진을 업로드할 수 있습니다',
   };
   return descriptions[type];
 }
@@ -183,6 +190,7 @@ export function validateBlockData(block: InvitationBlock): { valid: boolean; err
     case 'ACCOUNT':
     case 'TRANSPORT':
     case 'RSVP':
+    case 'SNAP_UPLOAD':
       // 이 블록들은 자동으로 채워지거나 읽기 전용이므로 항상 유효
       return { valid: true };
 

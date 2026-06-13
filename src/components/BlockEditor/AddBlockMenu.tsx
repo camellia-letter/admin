@@ -13,6 +13,7 @@ import {
   TransportIcon,
   RsvpIcon,
   ParentsIcon,
+  CameraIcon,
 } from '@/components/ui/icons';
 import { getBlockLabel, getBlockDescription } from '@/utils/blockHelpers';
 
@@ -33,6 +34,7 @@ const blockTypes: BlockType[] = [
   'ACCOUNT',
   'TRANSPORT',
   'RSVP',
+  'SNAP_UPLOAD',
 ];
 
 const blockIcons: Record<BlockType, React.ComponentType<{ className?: string }>> = {
@@ -48,6 +50,7 @@ const blockIcons: Record<BlockType, React.ComponentType<{ className?: string }>>
   ACCOUNT: AccountIcon,
   TRANSPORT: TransportIcon,
   RSVP: RsvpIcon,
+  SNAP_UPLOAD: CameraIcon,
 };
 
 export const AddBlockMenu = ({ onAddBlock }: AddBlockMenuProps) => {

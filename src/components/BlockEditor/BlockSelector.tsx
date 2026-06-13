@@ -28,6 +28,7 @@ import {
   RsvpIcon,
   ParentsIcon,
   DragHandleIcon,
+  CameraIcon,
 } from '@/components/ui/icons';
 import { getBlockLabel, getBlockDescription } from '@/utils/blockHelpers';
 import { Stack, Paper, Flex, Text, Switch, ActionIcon, UnstyledButton } from '@mantine/core';
@@ -53,6 +54,7 @@ const ALL_BLOCK_TYPES: BlockType[] = [
   'ACCOUNT',
   'TRANSPORT',
   'RSVP',
+  'SNAP_UPLOAD',
 ];
 
 const blockIcons: Record<BlockType, React.ComponentType<{ className?: string }>> = {
@@ -68,6 +70,7 @@ const blockIcons: Record<BlockType, React.ComponentType<{ className?: string }>>
   ACCOUNT: AccountIcon,
   TRANSPORT: TransportIcon,
   RSVP: RsvpIcon,
+  SNAP_UPLOAD: CameraIcon,
 };
 
 interface SortableBlockItemProps {
