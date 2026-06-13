@@ -79,6 +79,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
       'ACCOUNT',
       'TRANSPORT',
       'RSVP',
+      'SNAP_UPLOAD',
     ];
     allTypes.forEach((type) => {
       if (!existingOrder.includes(type)) {
