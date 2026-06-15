@@ -1,8 +1,11 @@
-import { Card, Text, SimpleGrid, Button, Box, Group, Stack } from '@mantine/core';
+import { Card, Text, SimpleGrid, Button, Box, Group, Stack, Tabs, Table, Pagination } from '@mantine/core';
+import { useState } from 'react';
 import { useInvitationStats } from '@/hooks/useInvitations';
 import { StatsSkeleton } from '@/components/Skeleton';
 import { AppDialog } from '@/components/ui/AppDialog';
 import type { Invitation } from '@camellia-letter/shared-types';
+import { useQuery } from '@tanstack/react-query';
+import { getShareLogs } from '@/api/invitations';
 
 interface StatsModalProps {
   isOpen: boolean;
@@ -12,6 +15,14 @@ interface StatsModalProps {
 
 export default function StatsModal({ isOpen, onClose, invitation }: StatsModalProps) {
   const { data: stats, isLoading } = useInvitationStats(invitation.id);
+  const [activeTab, setActiveTab] = useState<string | null>('overview');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data: shareLogs, isLoading: isLoadingLogs } = useQuery({
+    queryKey: ['shareLogs', invitation.id, currentPage],
+    queryFn: () => getShareLogs(invitation.id, currentPage, 20),
+    enabled: activeTab === 'shareLogs',
+  });
 
   const footer = (
     <Button onClick={onClose} variant="light" color="gray" fullWidth>
@@ -26,14 +37,21 @@ export default function StatsModal({ isOpen, onClose, invitation }: StatsModalPr
       title={`${invitation.groomName} & ${invitation.brideName} 통계`}
       footer={footer}
     >
-      {isLoading ? (
-        <StatsSkeleton />
-      ) : stats ? (
-        <Stack gap="lg">
-          <SimpleGrid cols={2}>
-            <StatCard icon="👁️" label="총 조회수" value={stats.viewCount} color="blue" />
-            <StatCard icon="📤" label="공유 횟수" value={stats.shareCount} color="green" />
-          </SimpleGrid>
+      <Tabs value={activeTab} onChange={setActiveTab}>
+        <Tabs.List>
+          <Tabs.Tab value="overview">개요</Tabs.Tab>
+          <Tabs.Tab value="shareLogs">공유 로그</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="overview" pt="md">
+          {isLoading ? (
+            <StatsSkeleton />
+          ) : stats ? (
+            <Stack gap="lg">
+              <SimpleGrid cols={2}>
+                <StatCard icon="👁️" label="총 조회수" value={stats.viewCount} color="blue" />
+                <StatCard icon="📤" label="공유 횟수" value={stats.shareCount} color="green" />
+              </SimpleGrid>
 
           <Card padding="md" bg="violet.0">
             <Group gap="xs" mb="xs">
@@ -111,6 +129,48 @@ export default function StatsModal({ isOpen, onClose, invitation }: StatsModalPr
           <Text c="dimmed">통계를 불러올 수 없습니다.</Text>
         </Box>
       )}
+        </Tabs.Panel>
+
+        <Tabs.Panel value="shareLogs" pt="md">
+          {isLoadingLogs ? (
+            <Box ta="center" py="xl">
+              <Text c="dimmed">로딩 중...</Text>
+            </Box>
+          ) : shareLogs && shareLogs.items.length > 0 ? (
+            <Stack gap="md">
+              <Table striped highlightOnHover>
+                <Table.Thead>
+                  <Table.Tr>
+                    <Table.Th>번호</Table.Th>
+                    <Table.Th>공유 시간</Table.Th>
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>
+                  {shareLogs.items.map((log, index) => (
+                    <Table.Tr key={log.id}>
+                      <Table.Td>{(currentPage - 1) * 20 + index + 1}</Table.Td>
+                      <Table.Td>{new Date(log.sharedAt).toLocaleString('ko-KR')}</Table.Td>
+                    </Table.Tr>
+                  ))}
+                </Table.Tbody>
+              </Table>
+              {shareLogs.totalPages > 1 && (
+                <Group justify="center">
+                  <Pagination
+                    total={shareLogs.totalPages}
+                    value={currentPage}
+                    onChange={setCurrentPage}
+                  />
+                </Group>
+              )}
+            </Stack>
+          ) : (
+            <Box ta="center" py="xl">
+              <Text c="dimmed">공유 로그가 없습니다.</Text>
+            </Box>
+          )}
+        </Tabs.Panel>
+      </Tabs>
     </AppDialog>
   );
 }

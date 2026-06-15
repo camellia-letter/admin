@@ -59,3 +59,28 @@ export const suggestSlug = async (
   });
   return data;
 };
+
+export interface ShareLog {
+  id: string;
+  invitationId: string;
+  sharedAt: string;
+}
+
+export interface ShareLogsResponse {
+  items: ShareLog[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export const getShareLogs = async (
+  id: string,
+  page = 1,
+  limit = 50,
+): Promise<ShareLogsResponse> => {
+  const { data } = await apiClient.get(`/api/invitations/${id}/share-logs`, {
+    params: { page, limit },
+  });
+  return data;
+};
