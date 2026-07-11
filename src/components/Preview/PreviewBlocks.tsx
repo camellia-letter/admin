@@ -71,7 +71,7 @@ export function PreviewMessageBlock({
     <Container size="sm" py={48}>
       <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
         {data.title && (
-          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
             {data.title}
           </Title>
         )}
@@ -134,7 +134,7 @@ export function PreviewInfoBlock({
     <Paper py={48} radius={0} style={{ backgroundColor: withAlpha(theme.colors.background, 0.5) }}>
       <Container size="sm">
         <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
-          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
             예식 일시
           </Title>
           <Stack gap={4} align="center">
@@ -226,7 +226,7 @@ export function PreviewMapBlock({
   return (
     <Container size="sm" py={48}>
       <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
-        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
           오시는 길
         </Title>
         <Paper shadow="sm" w="100%" style={{ overflow: 'hidden', borderRadius: `calc(${theme.borderRadius} * 2)` }}>
@@ -287,7 +287,7 @@ export function PreviewGalleryBlock({
   return (
     <Container size="lg" py={48} style={{ fontFamily: theme.fontFamily }}>
       <Stack gap="lg">
-        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
           갤러리
         </Title>
         <SimpleGrid cols={3} spacing="sm">
@@ -344,7 +344,7 @@ export function PreviewAccountBlock({
       <Container size="sm">
         <Stack gap="xl" style={{ fontFamily: theme.fontFamily }}>
           <Stack gap="md" align="center">
-            <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+            <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
               마음 전하실 곳
             </Title>
           </Stack>
@@ -470,7 +470,7 @@ export function PreviewTransportBlock({
   return (
     <Container size="sm" py={48} style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}>
       <Stack gap="xl">
-        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
           {title}
         </Title>
 
@@ -541,7 +541,7 @@ export function PreviewGuestbookBlock({ theme }: { theme: ThemeStyles }) {
   return (
     <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
       <Stack gap="lg">
-        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
           방명록
         </Title>
         <Paper
@@ -613,7 +613,7 @@ export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: 
         <Paper p="xl" shadow="sm" style={{ borderRadius: `calc(${theme.borderRadius} * 2)` }}>
           <Stack gap="lg">
             <Stack gap={6} align="center">
-              <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+              <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
                 {title}
               </Title>
               {description && (
@@ -943,7 +943,7 @@ export function PreviewSnapUploadBlock({
     >
       <Container size="sm">
         <Stack gap="lg">
-          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text, fontFamily: theme.fontFamily }}>
             {title}
           </Title>
           <Paper

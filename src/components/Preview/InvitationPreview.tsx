@@ -38,13 +38,6 @@ export default function InvitationPreview({ formData }: InvitationPreviewProps) 
       ) : (
         <FallbackContent formData={formData} theme={theme} />
       )}
-
-      {/* Footer */}
-      <footer className="py-6 text-center" style={{ fontFamily: theme.fontFamily }}>
-        <p className="text-xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
-          {formData.groomName || '신랑'} ♥ {formData.brideName || '신부'}
-        </p>
-      </footer>
     </div>
   );
 }
