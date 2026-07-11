@@ -607,106 +607,100 @@ export function PreviewParentsBlock({
   const hasAnyParents = hasGroomParents || hasBrideParents;
 
   return (
-    <section
-      className="py-8 px-4"
+    <Container
+      size="sm"
+      py={48}
       style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}
     >
-      <div className="max-w-full mx-auto space-y-6">
-        {hasAnyParents ? (
-          <>
-            {hasGroomParents && (
-          <div className="flex justify-between items-center gap-2">
-            <span className="text-sm" style={{ color: theme.colors.text, minWidth: 50 }}>
-              신랑
-            </span>
-            <div className="flex-1 flex items-center justify-center gap-2">
-              <div className="flex flex-col items-center gap-1">
-                {groomFatherName && (
-                  <span className="text-sm" style={{ color: theme.colors.text }}>
-                    {groomFatherName}
-                  </span>
-                )}
-                {groomMotherName && (
-                  <span className="text-sm" style={{ color: theme.colors.text }}>
-                    {groomMotherName}
-                  </span>
-                )}
-              </div>
-              {groomFatherName && groomMotherName && (
-                <span className="text-xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                  의
-                </span>
+      <Box p="md" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.05), borderRadius: theme.borderRadius }}>
+        <Stack gap={32}>
+          {hasAnyParents ? (
+            <>
+              {hasGroomParents && (
+                <Flex justify="space-between" wrap="nowrap" gap="md">
+                  <Text size="md" fw={600} style={{ color: theme.colors.text, minWidth: 50 }}>
+                    신랑
+                  </Text>
+                  <Flex flex={1} align="center" justify="center" gap="sm">
+                    <Stack gap="xs" align="center">
+                      {groomFatherName && (
+                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
+                          {groomFatherName}
+                        </Text>
+                      )}
+                      {groomMotherName && (
+                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
+                          {groomMotherName}
+                        </Text>
+                      )}
+                    </Stack>
+                    {groomFatherName && groomMotherName && (
+                      <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                        의
+                      </Text>
+                    )}
+                  </Flex>
+                  <Flex align="center" gap="xs" style={{ minWidth: 80, justifyContent: 'flex-end' }}>
+                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                      아들
+                    </Text>
+                    <Text size="md" fw={600} style={{ color: theme.colors.text }}>
+                      {groomName}
+                    </Text>
+                  </Flex>
+                </Flex>
               )}
-            </div>
-            <div
-              className="flex items-center gap-1"
-              style={{ minWidth: 80, justifyContent: 'flex-end' }}
-            >
-              <span className="text-xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                아들
-              </span>
-              <span className="text-sm" style={{ color: theme.colors.text }}>
-                {groomName}
-              </span>
-            </div>
-          </div>
-        )}
 
-        {hasGroomParents && hasBrideParents && (
-          <div className="h-px" style={{ backgroundColor: theme.colors.text, opacity: 0.1 }} />
-        )}
+              {hasGroomParents && hasBrideParents && <Divider style={{ opacity: 0.1 }} />}
 
-        {hasBrideParents && (
-          <div className="flex justify-between items-center gap-2">
-            <span className="text-sm" style={{ color: theme.colors.text, minWidth: 50 }}>
-              신부
-            </span>
-            <div className="flex-1 flex items-center justify-center gap-2">
-              <div className="flex flex-col items-center gap-1">
-                {brideFatherName && (
-                  <span className="text-sm" style={{ color: theme.colors.text }}>
-                    {brideFatherName}
-                  </span>
-                )}
-                {brideMotherName && (
-                  <span className="text-sm" style={{ color: theme.colors.text }}>
-                    {brideMotherName}
-                  </span>
-                )}
-              </div>
-              {brideFatherName && brideMotherName && (
-                <span className="text-xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                  의
-                </span>
+              {hasBrideParents && (
+                <Flex justify="space-between" wrap="nowrap" gap="md">
+                  <Text size="md" fw={600} style={{ color: theme.colors.text, minWidth: 50 }}>
+                    신부
+                  </Text>
+                  <Flex flex={1} align="center" justify="center" gap="sm">
+                    <Stack gap="xs" align="center">
+                      {brideFatherName && (
+                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
+                          {brideFatherName}
+                        </Text>
+                      )}
+                      {brideMotherName && (
+                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
+                          {brideMotherName}
+                        </Text>
+                      )}
+                    </Stack>
+                    {brideFatherName && brideMotherName && (
+                      <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                        의
+                      </Text>
+                    )}
+                  </Flex>
+                  <Flex align="center" gap="xs" style={{ minWidth: 80, justifyContent: 'flex-end' }}>
+                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                      딸
+                    </Text>
+                    <Text size="md" fw={600} style={{ color: theme.colors.text }}>
+                      {brideName}
+                    </Text>
+                  </Flex>
+                </Flex>
               )}
-            </div>
-            <div
-              className="flex items-center gap-1"
-              style={{ minWidth: 80, justifyContent: 'flex-end' }}
-            >
-              <span className="text-xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                딸
-              </span>
-              <span className="text-sm" style={{ color: theme.colors.text }}>
-                {brideName}
-              </span>
-            </div>
-          </div>
-        )}
-          </>
-        ) : (
-          <div
-            className="py-8 text-center"
-            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
-          >
-            <span className="text-2xl">👨‍👩‍👧‍👦</span>
-            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
-              부모님 성함을 추가하세요
-            </p>
-          </div>
-        )}
-      </div>
-    </section>
+            </>
+          ) : (
+            <Box py="xl" ta="center">
+              <Stack gap="xs" align="center">
+                <Text size="xl">👨‍👩‍👧‍👦</Text>
+                <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                  부모님 성함을 추가하세요
+                </Text>
+              </Stack>
+            </Box>
+          )}
+        </Stack>
+      </Box>
+    </Container>
   );
 }
 
