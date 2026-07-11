@@ -28,40 +28,23 @@ export function PreviewMessageBlock({
   data: { title?: string; content?: string };
   theme: ThemeStyles;
 }) {
-  const hasContent = data.title || data.content;
+  if (!data.title && !data.content) return null;
 
   return (
-    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
-      <Stack gap="lg" align="center">
-        {hasContent ? (
-          <>
-            {data.title && (
-              <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
-                {data.title}
-              </Title>
-            )}
-            {data.content && (
-              <Text
-                ta="center"
-                style={{
-                  color: theme.colors.text,
-                  lineHeight: 1.8,
-                  whiteSpace: 'pre-line'
-                }}
-              >
-                {data.content}
-              </Text>
-            )}
-          </>
-        ) : (
-          <Box py="lg">
-            <Stack gap="xs" align="center">
-              <Text size="xl">💌</Text>
-              <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
-                인사말을 추가하세요
-              </Text>
-            </Stack>
-          </Box>
+    <Container size="sm" py={48}>
+      <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
+        {data.title && (
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+            {data.title}
+          </Title>
+        )}
+        {data.content && (
+          <Text
+            ta="center"
+            style={{ color: theme.colors.text, opacity: 0.8, whiteSpace: 'pre-line', lineHeight: 1.8 }}
+          >
+            {data.content}
+          </Text>
         )}
       </Stack>
     </Container>
@@ -333,66 +316,89 @@ export function PreviewTransportBlock({
   const { title = '오시는 길 안내', items = [], parkingInfo = '' } = data;
   const hasItems = items.length > 0;
   const hasParkingInfo = parkingInfo && parkingInfo.trim() !== '';
-  const hasAnyContent = hasItems || hasParkingInfo;
+
+  if (!hasItems && !hasParkingInfo) {
+    return null;
+  }
+
+  const getTransportColor = (type: TransportType) => {
+    switch (type) {
+      case 'subway':
+        return { bg: withAlpha(theme.colors.primary, 0.08), border: withAlpha(theme.colors.primary, 0.2) };
+      case 'bus':
+        return { bg: withAlpha(theme.colors.accent, 0.08), border: withAlpha(theme.colors.accent, 0.2) };
+      case 'car':
+        return { bg: withAlpha(theme.colors.secondary, 0.15), border: withAlpha(theme.colors.secondary, 0.3) };
+      case 'shuttle':
+        return { bg: withAlpha(theme.colors.primary, 0.05), border: withAlpha(theme.colors.primary, 0.15) };
+      default:
+        return { bg: withAlpha(theme.colors.text, 0.05), border: withAlpha(theme.colors.text, 0.1) };
+    }
+  };
 
   return (
     <Container size="sm" py={48} style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}>
-      <Stack gap="lg">
+      <Stack gap="xl">
         <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           {title}
         </Title>
-        {hasAnyContent ? (
-          <Stack gap="sm">
-            {items.slice(0, 3).map((item, index) => (
-              <Paper
-                key={index}
-                p="sm"
-                style={{
-                  backgroundColor: withAlpha(theme.colors.primary, 0.05),
-                  border: `1px solid ${withAlpha(theme.colors.primary, 0.1)}`,
-                  borderRadius: theme.borderRadius,
-                }}
-              >
-                <Flex align="center" gap="sm">
-                  <Text size="lg">{transportIcons[item.type] || '📍'}</Text>
-                  <Text size="xs" style={{ color: theme.colors.text }}>
-                    {item.title}
-                  </Text>
-                </Flex>
-              </Paper>
-            ))}
-            {items.length > 3 && (
-              <Text size="xs" ta="center" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                +{items.length - 3}개 더보기
-              </Text>
-            )}
-            {hasParkingInfo && (
-              <Paper
-                p="sm"
-                style={{
-                  backgroundColor: withAlpha(theme.colors.secondary, 0.1),
-                  border: `1px solid ${withAlpha(theme.colors.secondary, 0.2)}`,
-                  borderRadius: theme.borderRadius,
-                }}
-              >
-                <Flex align="center" gap="sm">
-                  <Text size="lg">🅿️</Text>
-                  <Text size="xs" style={{ color: theme.colors.text }}>
-                    주차 안내
-                  </Text>
-                </Flex>
-              </Paper>
-            )}
+
+        {hasItems && (
+          <Stack gap="md">
+            {items.map((item, index) => {
+              const icon = transportIcons[item.type] || transportIcons.other;
+              const itemColors = getTransportColor(item.type);
+
+              return (
+                <Paper
+                  key={index}
+                  p="md"
+                  style={{
+                    backgroundColor: itemColors.bg,
+                    border: `1px solid ${itemColors.border}`,
+                    borderRadius: theme.borderRadius,
+                  }}
+                >
+                  <Flex gap="md" align="flex-start">
+                    <Text size="xl">{icon}</Text>
+                    <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+                      <Text fw={600} style={{ color: theme.colors.text }}>
+                        {item.title}
+                      </Text>
+                      {item.description && (
+                        <Text size="sm" style={{ color: theme.colors.text, opacity: 0.75, whiteSpace: 'pre-line' }}>
+                          {item.description}
+                        </Text>
+                      )}
+                    </Stack>
+                  </Flex>
+                </Paper>
+              );
+            })}
           </Stack>
-        ) : (
-          <Box py="xl" ta="center" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}>
-            <Stack gap="xs" align="center">
-              <Text size="xl">🚗</Text>
-              <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
-                교통 정보를 추가하세요
-              </Text>
-            </Stack>
-          </Box>
+        )}
+
+        {hasParkingInfo && (
+          <Paper
+            p="md"
+            style={{
+              backgroundColor: withAlpha(theme.colors.secondary, 0.15),
+              border: `1px solid ${withAlpha(theme.colors.secondary, 0.3)}`,
+              borderRadius: theme.borderRadius,
+            }}
+          >
+            <Flex gap="md" align="flex-start">
+              <Text size="xl">🅿️</Text>
+              <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+                <Text fw={600} style={{ color: theme.colors.text }}>
+                  주차 안내
+                </Text>
+                <Text size="sm" style={{ color: theme.colors.text, opacity: 0.75, whiteSpace: 'pre-line' }}>
+                  {parkingInfo}
+                </Text>
+              </Stack>
+            </Flex>
+          </Paper>
         )}
       </Stack>
     </Container>
