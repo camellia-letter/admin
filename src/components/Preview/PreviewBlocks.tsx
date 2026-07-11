@@ -159,33 +159,42 @@ export function PreviewMapBlock({
   theme: ThemeStyles;
 }) {
   return (
-    <section className="py-8 px-4" style={{ fontFamily: theme.fontFamily }}>
-      <div className="max-w-full mx-auto text-center">
-        <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
+    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
+      <Stack gap="lg" align="center">
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           오시는 길
-        </h2>
-        <div
-          className="bg-white shadow-sm p-4"
-          style={{ borderRadius: `calc(${theme.borderRadius} * 2)` }}
+        </Title>
+        <Paper
+          p="md"
+          shadow="sm"
+          style={{ borderRadius: `calc(${theme.borderRadius} * 2)`, backgroundColor: 'white', width: '100%' }}
         >
-          <p className="text-base" style={{ color: theme.colors.text }}>
-            {venue}
-          </p>
-          <p className="text-xs mt-1" style={{ color: theme.colors.text, opacity: 0.6 }}>
-            {venueAddress}
-          </p>
-          <div
-            className="mt-3 inline-block px-3 py-1.5 text-xs font-medium text-white"
-            style={{
-              backgroundColor: theme.colors.primary,
-              borderRadius: theme.borderRadius,
-            }}
-          >
-            지도 보기
-          </div>
-        </div>
-      </div>
-    </section>
+          <Stack gap="xs" align="center">
+            <Text size="lg" fw={500} style={{ color: theme.colors.text }}>
+              {venue}
+            </Text>
+            <Text size="sm" style={{ color: theme.colors.text, opacity: 0.6 }}>
+              {venueAddress}
+            </Text>
+            <Box mt="xs">
+              <Paper
+                px="md"
+                py="xs"
+                style={{
+                  backgroundColor: theme.colors.primary,
+                  borderRadius: theme.borderRadius,
+                  display: 'inline-block',
+                }}
+              >
+                <Text size="sm" fw={500} style={{ color: 'white' }}>
+                  지도 보기
+                </Text>
+              </Paper>
+            </Box>
+          </Stack>
+        </Paper>
+      </Stack>
+    </Container>
   );
 }
 
@@ -260,67 +269,73 @@ export function PreviewAccountBlock({
   const hasAnyAccounts = hasGroomAccounts || hasBrideAccounts;
 
   return (
-    <section
-      className="py-8 px-4"
+    <Paper
+      py={48}
+      radius={0}
       style={{
         background: `linear-gradient(to bottom, ${withAlpha(theme.colors.secondary, 0.2)}, ${theme.colors.background})`,
         fontFamily: theme.fontFamily,
       }}
     >
-      <div className="max-w-full mx-auto">
-        <h2 className="text-sm font-medium text-center mb-4" style={{ color: theme.colors.text }}>
-          마음 전하실 곳
-        </h2>
-        {hasAnyAccounts ? (
-          <div className="space-y-3">
-            {hasGroomAccounts && (
-            <div
-              className="border p-3 text-center"
-              style={{
-                backgroundColor: withAlpha(theme.colors.primary, 0.05),
-                borderColor: withAlpha(theme.colors.primary, 0.2),
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <p className="text-xs font-medium" style={{ color: theme.colors.primary }}>
-                {groomTitle}
-              </p>
-              <p className="text-xs mt-1" style={{ color: theme.colors.text, opacity: 0.7 }}>
-                {groomAccounts.length}개 계좌
-              </p>
-            </div>
+      <Container size="sm">
+        <Stack gap="lg">
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+            마음 전하실 곳
+          </Title>
+          {hasAnyAccounts ? (
+            <Stack gap="md">
+              {hasGroomAccounts && (
+                <Paper
+                  p="md"
+                  style={{
+                    backgroundColor: withAlpha(theme.colors.primary, 0.05),
+                    border: `1px solid ${withAlpha(theme.colors.primary, 0.2)}`,
+                    borderRadius: theme.borderRadius,
+                  }}
+                >
+                  <Stack gap="xs" align="center">
+                    <Text size="sm" fw={500} style={{ color: theme.colors.primary }}>
+                      {groomTitle}
+                    </Text>
+                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.7 }}>
+                      {groomAccounts.length}개 계좌
+                    </Text>
+                  </Stack>
+                </Paper>
+              )}
+              {hasBrideAccounts && (
+                <Paper
+                  p="md"
+                  style={{
+                    backgroundColor: withAlpha(theme.colors.accent, 0.05),
+                    border: `1px solid ${withAlpha(theme.colors.accent, 0.2)}`,
+                    borderRadius: theme.borderRadius,
+                  }}
+                >
+                  <Stack gap="xs" align="center">
+                    <Text size="sm" fw={500} style={{ color: theme.colors.accent }}>
+                      {brideTitle}
+                    </Text>
+                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.7 }}>
+                      {brideAccounts.length}개 계좌
+                    </Text>
+                  </Stack>
+                </Paper>
+              )}
+            </Stack>
+          ) : (
+            <Box py="xl" ta="center" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}>
+              <Stack gap="xs" align="center">
+                <Text size="xl">💰</Text>
+                <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                  계좌 정보를 추가하세요
+                </Text>
+              </Stack>
+            </Box>
           )}
-          {hasBrideAccounts && (
-            <div
-              className="border p-3 text-center"
-              style={{
-                backgroundColor: withAlpha(theme.colors.accent, 0.05),
-                borderColor: withAlpha(theme.colors.accent, 0.2),
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <p className="text-xs font-medium" style={{ color: theme.colors.accent }}>
-                {brideTitle}
-              </p>
-              <p className="text-xs mt-1" style={{ color: theme.colors.text, opacity: 0.7 }}>
-                {brideAccounts.length}개 계좌
-              </p>
-            </div>
-          )}
-          </div>
-        ) : (
-          <div
-            className="py-8 text-center"
-            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
-          >
-            <span className="text-2xl">💰</span>
-            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
-              계좌 정보를 추가하세요
-            </p>
-          </div>
-        )}
-      </div>
-    </section>
+        </Stack>
+      </Container>
+    </Paper>
   );
 }
 
@@ -346,116 +361,124 @@ export function PreviewTransportBlock({
   const hasAnyContent = hasItems || hasParkingInfo;
 
   return (
-    <section
-      className="py-8 px-4"
-      style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}
-    >
-      <div className="max-w-full mx-auto">
-        <h2 className="text-sm font-medium text-center mb-4" style={{ color: theme.colors.text }}>
+    <Container size="sm" py={48} style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}>
+      <Stack gap="lg">
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           {title}
-        </h2>
+        </Title>
         {hasAnyContent ? (
-          <div className="space-y-2">
+          <Stack gap="sm">
             {items.slice(0, 3).map((item, index) => (
-            <div
-              key={index}
-              className="border p-2 flex items-center gap-2"
-              style={{
-                backgroundColor: withAlpha(theme.colors.primary, 0.05),
-                borderColor: withAlpha(theme.colors.primary, 0.1),
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <span className="text-lg">{transportIcons[item.type] || '📍'}</span>
-              <span className="text-xs" style={{ color: theme.colors.text }}>
-                {item.title}
-              </span>
-            </div>
-          ))}
-          {items.length > 3 && (
-            <p className="text-xs text-center" style={{ color: theme.colors.text, opacity: 0.6 }}>
-              +{items.length - 3}개 더보기
-            </p>
-          )}
-          {hasParkingInfo && (
-            <div
-              className="border p-2 flex items-center gap-2"
-              style={{
-                backgroundColor: withAlpha(theme.colors.secondary, 0.1),
-                borderColor: withAlpha(theme.colors.secondary, 0.2),
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <span className="text-lg">🅿️</span>
-              <span className="text-xs" style={{ color: theme.colors.text }}>
-                주차 안내
-              </span>
-            </div>
-          )}
-          </div>
+              <Paper
+                key={index}
+                p="sm"
+                style={{
+                  backgroundColor: withAlpha(theme.colors.primary, 0.05),
+                  border: `1px solid ${withAlpha(theme.colors.primary, 0.1)}`,
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <Flex align="center" gap="sm">
+                  <Text size="lg">{transportIcons[item.type] || '📍'}</Text>
+                  <Text size="xs" style={{ color: theme.colors.text }}>
+                    {item.title}
+                  </Text>
+                </Flex>
+              </Paper>
+            ))}
+            {items.length > 3 && (
+              <Text size="xs" ta="center" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                +{items.length - 3}개 더보기
+              </Text>
+            )}
+            {hasParkingInfo && (
+              <Paper
+                p="sm"
+                style={{
+                  backgroundColor: withAlpha(theme.colors.secondary, 0.1),
+                  border: `1px solid ${withAlpha(theme.colors.secondary, 0.2)}`,
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <Flex align="center" gap="sm">
+                  <Text size="lg">🅿️</Text>
+                  <Text size="xs" style={{ color: theme.colors.text }}>
+                    주차 안내
+                  </Text>
+                </Flex>
+              </Paper>
+            )}
+          </Stack>
         ) : (
-          <div
-            className="py-8 text-center"
-            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
-          >
-            <span className="text-2xl">🚗</span>
-            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
-              교통 정보를 추가하세요
-            </p>
-          </div>
+          <Box py="xl" ta="center" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}>
+            <Stack gap="xs" align="center">
+              <Text size="xl">🚗</Text>
+              <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                교통 정보를 추가하세요
+              </Text>
+            </Stack>
+          </Box>
         )}
-      </div>
-    </section>
+      </Stack>
+    </Container>
   );
 }
 
 // Guestbook Block
 export function PreviewGuestbookBlock({ theme }: { theme: ThemeStyles }) {
   return (
-    <section className="py-8 px-4" style={{ fontFamily: theme.fontFamily }}>
-      <div className="max-w-full mx-auto">
-        <h2 className="text-sm font-medium mb-4 text-center" style={{ color: theme.colors.text }}>
+    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
+      <Stack gap="lg">
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           방명록
-        </h2>
-        <div
-          className="bg-white shadow-sm p-4"
-          style={{ borderRadius: `calc(${theme.borderRadius} * 2)` }}
+        </Title>
+        <Paper
+          p="md"
+          shadow="sm"
+          style={{ borderRadius: `calc(${theme.borderRadius} * 2)`, backgroundColor: 'white' }}
         >
-          <div className="space-y-2">
+          <Stack gap="sm">
             <input
               type="text"
               placeholder="이름"
               disabled
-              className="w-full px-2 py-1.5 border text-xs"
               style={{
-                borderColor: theme.colors.secondary,
+                width: '100%',
+                padding: '8px',
+                border: `1px solid ${theme.colors.secondary}`,
                 borderRadius: theme.borderRadius,
+                fontSize: '12px',
               }}
             />
             <textarea
               placeholder="축하 메시지"
               disabled
               rows={2}
-              className="w-full px-2 py-1.5 border text-xs resize-none"
               style={{
-                borderColor: theme.colors.secondary,
+                width: '100%',
+                padding: '8px',
+                border: `1px solid ${theme.colors.secondary}`,
                 borderRadius: theme.borderRadius,
+                fontSize: '12px',
+                resize: 'none',
               }}
             />
-            <button
-              disabled
-              className="w-full py-1.5 text-xs text-white"
+            <Paper
+              py="xs"
               style={{
                 backgroundColor: theme.colors.primary,
                 borderRadius: theme.borderRadius,
+                cursor: 'not-allowed',
               }}
             >
-              작성하기
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+              <Text size="sm" ta="center" style={{ color: 'white' }}>
+                작성하기
+              </Text>
+            </Paper>
+          </Stack>
+        </Paper>
+      </Stack>
+    </Container>
   );
 }
 
@@ -464,47 +487,54 @@ export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: 
   const { title = '참석 여부' } = data;
 
   return (
-    <section
-      className="py-8 px-4"
+    <Paper
+      py={48}
+      radius={0}
       style={{
         background: `linear-gradient(to bottom, ${withAlpha(theme.colors.secondary, 0.2)}, ${theme.colors.background})`,
         fontFamily: theme.fontFamily,
       }}
     >
-      <div className="max-w-full mx-auto">
-        <h2 className="text-sm font-medium text-center mb-4" style={{ color: theme.colors.text }}>
-          {title}
-        </h2>
-        <div className="grid grid-cols-3 gap-1">
-          {['참석', '불참', '미정'].map((label, index) => (
-            <div
-              key={index}
-              className="border p-2 text-center"
-              style={{
-                borderColor: index === 0 ? theme.colors.primary : theme.colors.secondary,
-                backgroundColor: index === 0 ? withAlpha(theme.colors.primary, 0.1) : 'transparent',
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <span className="text-lg">{['😊', '😢', '🤔'][index]}</span>
-              <p className="text-xs mt-1" style={{ color: theme.colors.text }}>
-                {label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <button
-          disabled
-          className="w-full mt-3 py-1.5 text-xs text-white"
-          style={{
-            backgroundColor: theme.colors.primary,
-            borderRadius: theme.borderRadius,
-          }}
-        >
-          참석 여부 제출
-        </button>
-      </div>
-    </section>
+      <Container size="sm">
+        <Stack gap="lg">
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+            {title}
+          </Title>
+          <SimpleGrid cols={3} spacing="xs">
+            {['참석', '불참', '미정'].map((label, index) => (
+              <Paper
+                key={index}
+                p="sm"
+                style={{
+                  border: `1px solid ${index === 0 ? theme.colors.primary : theme.colors.secondary}`,
+                  backgroundColor: index === 0 ? withAlpha(theme.colors.primary, 0.1) : 'transparent',
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <Stack gap="xs" align="center">
+                  <Text size="lg">{['😊', '😢', '🤔'][index]}</Text>
+                  <Text size="xs" style={{ color: theme.colors.text }}>
+                    {label}
+                  </Text>
+                </Stack>
+              </Paper>
+            ))}
+          </SimpleGrid>
+          <Paper
+            py="xs"
+            style={{
+              backgroundColor: theme.colors.primary,
+              borderRadius: theme.borderRadius,
+              cursor: 'not-allowed',
+            }}
+          >
+            <Text size="sm" ta="center" style={{ color: 'white' }}>
+              참석 여부 제출
+            </Text>
+          </Paper>
+        </Stack>
+      </Container>
+    </Paper>
   );
 }
 
@@ -725,47 +755,55 @@ export function PreviewSnapUploadBlock({
   const description = data?.description || '하객들이 촬영한 사진을 업로드할 수 있습니다.';
 
   return (
-    <section
-      className="py-8 px-4"
+    <Paper
+      py={48}
+      radius={0}
       style={{
         background: `linear-gradient(to bottom, ${withAlpha(theme.colors.secondary, 0.15)}, ${theme.colors.background})`,
         fontFamily: theme.fontFamily,
       }}
     >
-      <div className="max-w-full mx-auto text-center">
-        <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
-          {title}
-        </h2>
-        <div
-          className="bg-white shadow-sm p-4"
-          style={{ borderRadius: `calc(${theme.borderRadius} * 2)` }}
-        >
-          <div className="space-y-2">
-            <div
-              className="border-2 border-dashed p-6 flex flex-col items-center gap-2"
-              style={{
-                borderColor: theme.colors.secondary,
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <span className="text-2xl">📸</span>
-              <p className="text-xs" style={{ color: theme.colors.text, opacity: 0.7 }}>
-                {description}
-              </p>
-            </div>
-            <button
-              disabled
-              className="w-full py-1.5 text-xs text-white"
-              style={{
-                backgroundColor: theme.colors.primary,
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              사진 선택하기
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+      <Container size="sm">
+        <Stack gap="lg">
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+            {title}
+          </Title>
+          <Paper
+            p="md"
+            shadow="sm"
+            style={{ borderRadius: `calc(${theme.borderRadius} * 2)`, backgroundColor: 'white' }}
+          >
+            <Stack gap="sm">
+              <Box
+                p="xl"
+                style={{
+                  border: `2px dashed ${theme.colors.secondary}`,
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <Stack gap="xs" align="center">
+                  <Text size="xl">📸</Text>
+                  <Text size="xs" ta="center" style={{ color: theme.colors.text, opacity: 0.7 }}>
+                    {description}
+                  </Text>
+                </Stack>
+              </Box>
+              <Paper
+                py="xs"
+                style={{
+                  backgroundColor: theme.colors.primary,
+                  borderRadius: theme.borderRadius,
+                  cursor: 'not-allowed',
+                }}
+              >
+                <Text size="sm" ta="center" style={{ color: 'white' }}>
+                  사진 선택하기
+                </Text>
+              </Paper>
+            </Stack>
+          </Paper>
+        </Stack>
+      </Container>
+    </Paper>
   );
 }
