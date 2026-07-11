@@ -4,6 +4,7 @@ import type {
   RsvpBlockData,
   TransportType,
   ParentsBlockData,
+  HeaderBlockData,
 } from '@camellia-letter/shared-types';
 import { Container, Stack, Text, Box, Flex, Divider, Title, Paper, SimpleGrid, AspectRatio } from '@mantine/core';
 import { withAlpha } from './themeUtils';
@@ -18,6 +19,41 @@ interface ThemeStyles {
   };
   fontFamily: string;
   borderRadius: string;
+}
+
+// Header Block
+export function PreviewHeaderBlock({
+  data,
+  groomName,
+  brideName,
+  theme,
+}: {
+  data: HeaderBlockData;
+  groomName: string;
+  brideName: string;
+  theme: ThemeStyles;
+}) {
+  const { showTitle = true } = data;
+
+  return (
+    <Container size="sm" py={64} style={{ fontFamily: theme.fontFamily }}>
+      <Stack gap="md" align="center">
+        {showTitle && (
+          <Text size="sm" ta="center" style={{ color: theme.colors.primary, opacity: 0.8, letterSpacing: '0.35em' }}>
+            WEDDING INVITATION
+          </Text>
+        )}
+        <Title
+          order={1}
+          ta="center"
+          style={{ color: theme.colors.text, fontFamily: 'var(--font-noto-serif), serif' }}
+        >
+          {groomName} & {brideName}
+        </Title>
+        <Divider w={64} color={theme.colors.secondary} />
+      </Stack>
+    </Container>
+  );
 }
 
 // Message Block

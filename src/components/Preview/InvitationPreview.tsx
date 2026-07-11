@@ -1,6 +1,7 @@
 import type { UpdateInvitationDto, InvitationBlock } from '@camellia-letter/shared-types';
 import { getThemeStyles, withAlpha } from './themeUtils';
 import {
+  PreviewHeaderBlock,
   PreviewMessageBlock,
   PreviewInfoBlock,
   PreviewMapBlock,
@@ -31,23 +32,6 @@ export default function InvitationPreview({ formData }: InvitationPreviewProps) 
         fontFamily: theme.fontFamily,
       }}
     >
-      {/* Hero Section - 신랑 & 신부 이름 */}
-      <section className="pt-10 pb-8 px-4 text-center">
-        <p
-          className="text-xs tracking-widest mb-3"
-          style={{ color: theme.colors.primary, opacity: 0.8 }}
-        >
-          WEDDING INVITATION
-        </p>
-        <h1 className="text-xl font-serif mb-2" style={{ color: theme.colors.text }}>
-          {formData.groomName || '신랑'} & {formData.brideName || '신부'}
-        </h1>
-        <div
-          className="w-12 h-px mx-auto mt-4"
-          style={{ backgroundColor: theme.colors.secondary }}
-        />
-      </section>
-
       {/* Dynamic Blocks Rendering */}
       {blocks.length > 0 ? (
         <BlockRenderer blocks={blocks} formData={formData} theme={theme} />
@@ -56,7 +40,7 @@ export default function InvitationPreview({ formData }: InvitationPreviewProps) 
       )}
 
       {/* Footer */}
-      <footer className="py-6 text-center">
+      <footer className="py-6 text-center" style={{ fontFamily: theme.fontFamily }}>
         <p className="text-xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
           {formData.groomName || '신랑'} ♥ {formData.brideName || '신부'}
         </p>
@@ -81,6 +65,16 @@ function BlockRenderer({
     <>
       {sortedBlocks.map((block) => {
         switch (block.type) {
+          case 'HEADER':
+            return (
+              <PreviewHeaderBlock
+                key={block.id}
+                data={block.data}
+                groomName={formData.groomName || ''}
+                brideName={formData.brideName || ''}
+                theme={theme}
+              />
+            );
           case 'HERO':
             return <PreviewHeroBlock key={block.id} data={block.data} theme={theme} />;
           case 'WEDDING_SUMMARY':
