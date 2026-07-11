@@ -5,7 +5,7 @@ import type {
   TransportType,
   ParentsBlockData,
 } from '@camellia-letter/shared-types';
-import { Container, Stack, Text, Box, Flex, Divider, Title } from '@mantine/core';
+import { Container, Stack, Text, Box, Flex, Divider, Title, Paper } from '@mantine/core';
 import { withAlpha } from './themeUtils';
 
 interface ThemeStyles {
@@ -84,7 +84,7 @@ export function PreviewInfoBlock({
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-    weekday: 'short',
+    weekday: 'long',
   });
 
   const formattedTime = date.toLocaleTimeString('ko-KR', {
@@ -111,32 +111,40 @@ export function PreviewInfoBlock({
   }
 
   return (
-    <section
-      className="py-8 px-4"
-      style={{ backgroundColor: withAlpha(theme.colors.background, 0.5) }}
-    >
-      <div className="max-w-full mx-auto text-center" style={{ fontFamily: theme.fontFamily }}>
-        <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
-          예식 일시
-        </h2>
-        <p className="text-base font-light" style={{ color: theme.colors.text }}>
-          {formattedDate}
-        </p>
-        <p className="text-sm mt-1" style={{ color: theme.colors.primary }}>
-          {formattedTime}
-        </p>
-        <div
-          className="mt-4 inline-block px-3 py-1 text-xs font-medium"
-          style={{
-            backgroundColor: withAlpha(theme.colors.primary, 0.1),
-            color: theme.colors.primary,
-            borderRadius: theme.borderRadius === '0' ? '9999px' : `calc(${theme.borderRadius} * 4)`,
-          }}
-        >
-          {ddayText}
-        </div>
-      </div>
-    </section>
+    <Paper py={48} radius={0} style={{ backgroundColor: withAlpha(theme.colors.background, 0.5) }}>
+      <Container size="sm">
+        <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
+          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+            예식 일시
+          </Title>
+          <Stack gap={4} align="center">
+            <Text size="xl" ta="center" style={{ color: theme.colors.text }}>
+              {formattedDate}
+            </Text>
+            {formattedTime && (
+              <Text size="lg" ta="center" style={{ color: theme.colors.primary }}>
+                {formattedTime}
+              </Text>
+            )}
+          </Stack>
+          {ddayText && (
+            <Paper
+              px="md"
+              py="xs"
+              style={{
+                backgroundColor: withAlpha(theme.colors.primary, 0.1),
+                color: theme.colors.primary,
+                borderRadius: theme.borderRadius === '0' ? '9999px' : `calc(${theme.borderRadius} * 4)`,
+              }}
+            >
+              <Text size="sm" fw={600}>
+                {ddayText}
+              </Text>
+            </Paper>
+          )}
+        </Stack>
+      </Container>
+    </Paper>
   );
 }
 
