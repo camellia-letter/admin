@@ -159,38 +159,21 @@ export function PreviewMapBlock({
   theme: ThemeStyles;
 }) {
   return (
-    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
-      <Stack gap="lg" align="center">
+    <Container size="sm" py={48}>
+      <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
         <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           오시는 길
         </Title>
-        <Paper
-          p="md"
-          shadow="sm"
-          style={{ borderRadius: `calc(${theme.borderRadius} * 2)`, backgroundColor: 'white', width: '100%' }}
-        >
-          <Stack gap="xs" align="center">
-            <Text size="lg" fw={500} style={{ color: theme.colors.text }}>
-              {venue}
-            </Text>
-            <Text size="sm" style={{ color: theme.colors.text, opacity: 0.6 }}>
-              {venueAddress}
-            </Text>
-            <Box mt="xs">
-              <Paper
-                px="md"
-                py="xs"
-                style={{
-                  backgroundColor: theme.colors.primary,
-                  borderRadius: theme.borderRadius,
-                  display: 'inline-block',
-                }}
-              >
-                <Text size="sm" fw={500} style={{ color: 'white' }}>
-                  지도 보기
-                </Text>
-              </Paper>
-            </Box>
+        <Paper shadow="sm" w="100%" style={{ overflow: 'hidden', borderRadius: `calc(${theme.borderRadius} * 2)` }}>
+          <Stack gap="md" p="xl" align="center">
+            <Stack gap={4} align="center">
+              <Text size="xl" ta="center" style={{ color: theme.colors.text }}>
+                {venue}
+              </Text>
+              <Text ta="center" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                {venueAddress}
+              </Text>
+            </Stack>
           </Stack>
         </Paper>
       </Stack>
@@ -208,43 +191,34 @@ export function PreviewGalleryBlock({
 }) {
   const images = data.images || [];
 
+  if (images.length === 0) return null;
+
   return (
-    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
+    <Container size="lg" py={48} style={{ fontFamily: theme.fontFamily }}>
       <Stack gap="lg">
         <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           갤러리
         </Title>
-        {images.length > 0 ? (
-          <SimpleGrid cols={3} spacing="sm">
-            {images.map((image, index) => (
-              <AspectRatio key={index} ratio={1}>
-                <Paper
-                  style={{
-                    position: 'relative',
-                    overflow: 'hidden',
-                    backgroundColor: withAlpha(theme.colors.secondary, 0.2),
-                    borderRadius: theme.borderRadius,
-                  }}
-                >
-                  <img
-                    src={image.url}
-                    alt={image.caption || `이미지 ${index + 1}`}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                </Paper>
-              </AspectRatio>
-            ))}
-          </SimpleGrid>
-        ) : (
-          <Box py="xl" ta="center" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}>
-            <Stack gap="xs" align="center">
-              <Text size="xl">📷</Text>
-              <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
-                사진을 추가하세요
-              </Text>
-            </Stack>
-          </Box>
-        )}
+        <SimpleGrid cols={3} spacing="sm">
+          {images.map((image, index) => (
+            <AspectRatio key={index} ratio={1}>
+              <Paper
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  backgroundColor: withAlpha(theme.colors.secondary, 0.2),
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <img
+                  src={image.url}
+                  alt={image.caption || `이미지 ${index + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </Paper>
+            </AspectRatio>
+          ))}
+        </SimpleGrid>
       </Stack>
     </Container>
   );
@@ -274,14 +248,15 @@ export function PreviewAccountBlock({
       radius={0}
       style={{
         background: `linear-gradient(to bottom, ${withAlpha(theme.colors.secondary, 0.2)}, ${theme.colors.background})`,
-        fontFamily: theme.fontFamily,
       }}
     >
       <Container size="sm">
-        <Stack gap="lg">
-          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
-            마음 전하실 곳
-          </Title>
+        <Stack gap="xl" style={{ fontFamily: theme.fontFamily }}>
+          <Stack gap="md" align="center">
+            <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+              마음 전하실 곳
+            </Title>
+          </Stack>
           {hasAnyAccounts ? (
             <Stack gap="md">
               {hasGroomAccounts && (
@@ -645,101 +620,86 @@ export function PreviewParentsBlock({
   const hasBrideParents = brideFatherName || brideMotherName;
   const hasAnyParents = hasGroomParents || hasBrideParents;
 
+  if (!hasAnyParents) return null;
+
   return (
-    <Container
-      size="sm"
-      py={48}
-      style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}
-    >
-      <Box p="md" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.05), borderRadius: theme.borderRadius }}>
-        <Stack gap={32}>
-          {hasAnyParents ? (
-            <>
-              {hasGroomParents && (
-                <Flex justify="space-between" wrap="nowrap" gap="md">
-                  <Text size="md" fw={600} style={{ color: theme.colors.text, minWidth: 50 }}>
-                    신랑
+    <Box py={48} style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.15) }}>
+      <Container size="sm">
+        <Stack gap={32} style={{ fontFamily: theme.fontFamily }}>
+          {hasGroomParents && (
+            <Flex justify="space-between" align="center" p="md" gap="md" wrap="nowrap">
+              <Text size="md" fw={500} style={{ color: theme.colors.text, minWidth: 50, textAlign: 'left' }}>
+                신랑
+              </Text>
+              <Flex align="center" gap={8} style={{ flex: 1, justifyContent: 'center' }}>
+                <Stack gap={4} style={{ alignItems: 'center' }}>
+                  {groomFatherName && (
+                    <Text size="md" fw={600} style={{ color: theme.colors.text, whiteSpace: 'nowrap' }}>
+                      {groomFatherName}
+                    </Text>
+                  )}
+                  {groomMotherName && (
+                    <Text size="md" fw={600} style={{ color: theme.colors.text, whiteSpace: 'nowrap' }}>
+                      {groomMotherName}
+                    </Text>
+                  )}
+                </Stack>
+                {groomFatherName && groomMotherName && (
+                  <Text size="xs" fw={400} style={{ color: theme.colors.text, opacity: 0.6 }}>
+                    의
                   </Text>
-                  <Flex flex={1} align="center" justify="center" gap="sm">
-                    <Stack gap="xs" align="center">
-                      {groomFatherName && (
-                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
-                          {groomFatherName}
-                        </Text>
-                      )}
-                      {groomMotherName && (
-                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
-                          {groomMotherName}
-                        </Text>
-                      )}
-                    </Stack>
-                    {groomFatherName && groomMotherName && (
-                      <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                        의
-                      </Text>
-                    )}
-                  </Flex>
-                  <Flex align="center" gap="xs" style={{ minWidth: 80, justifyContent: 'flex-end' }}>
-                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                      아들
-                    </Text>
-                    <Text size="md" fw={600} style={{ color: theme.colors.text }}>
-                      {groomName}
-                    </Text>
-                  </Flex>
-                </Flex>
-              )}
-
-              {hasGroomParents && hasBrideParents && <Divider style={{ opacity: 0.1 }} />}
-
-              {hasBrideParents && (
-                <Flex justify="space-between" wrap="nowrap" gap="md">
-                  <Text size="md" fw={600} style={{ color: theme.colors.text, minWidth: 50 }}>
-                    신부
-                  </Text>
-                  <Flex flex={1} align="center" justify="center" gap="sm">
-                    <Stack gap="xs" align="center">
-                      {brideFatherName && (
-                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
-                          {brideFatherName}
-                        </Text>
-                      )}
-                      {brideMotherName && (
-                        <Text size="md" fw={600} style={{ color: theme.colors.text }}>
-                          {brideMotherName}
-                        </Text>
-                      )}
-                    </Stack>
-                    {brideFatherName && brideMotherName && (
-                      <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                        의
-                      </Text>
-                    )}
-                  </Flex>
-                  <Flex align="center" gap="xs" style={{ minWidth: 80, justifyContent: 'flex-end' }}>
-                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.6 }}>
-                      딸
-                    </Text>
-                    <Text size="md" fw={600} style={{ color: theme.colors.text }}>
-                      {brideName}
-                    </Text>
-                  </Flex>
-                </Flex>
-              )}
-            </>
-          ) : (
-            <Box py="xl" ta="center">
-              <Stack gap="xs" align="center">
-                <Text size="xl">👨‍👩‍👧‍👦</Text>
-                <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
-                  부모님 성함을 추가하세요
+                )}
+              </Flex>
+              <Flex align="center" gap={4} style={{ minWidth: 80, justifyContent: 'flex-end' }}>
+                <Text size="xs" fw={400} style={{ color: theme.colors.text, opacity: 0.6 }}>
+                  아들
                 </Text>
-              </Stack>
-            </Box>
+                <Text size="md" fw={600} style={{ color: theme.colors.text, whiteSpace: 'nowrap' }}>
+                  {groomName}
+                </Text>
+              </Flex>
+            </Flex>
+          )}
+
+          {hasGroomParents && hasBrideParents && <Divider color={theme.colors.text} opacity={0.1} />}
+
+          {hasBrideParents && (
+            <Flex justify="space-between" align="center" p="md" gap="md" wrap="nowrap">
+              <Text size="md" fw={500} style={{ color: theme.colors.text, minWidth: 50, textAlign: 'left' }}>
+                신부
+              </Text>
+              <Flex align="center" gap={8} style={{ flex: 1, justifyContent: 'center' }}>
+                <Stack gap={4} style={{ alignItems: 'center' }}>
+                  {brideFatherName && (
+                    <Text size="md" fw={600} style={{ color: theme.colors.text, whiteSpace: 'nowrap' }}>
+                      {brideFatherName}
+                    </Text>
+                  )}
+                  {brideMotherName && (
+                    <Text size="md" fw={600} style={{ color: theme.colors.text, whiteSpace: 'nowrap' }}>
+                      {brideMotherName}
+                    </Text>
+                  )}
+                </Stack>
+                {brideFatherName && brideMotherName && (
+                  <Text size="xs" fw={400} style={{ color: theme.colors.text, opacity: 0.6 }}>
+                    의
+                  </Text>
+                )}
+              </Flex>
+              <Flex align="center" gap={4} style={{ minWidth: 80, justifyContent: 'flex-end' }}>
+                <Text size="xs" fw={400} style={{ color: theme.colors.text, opacity: 0.6 }}>
+                  딸
+                </Text>
+                <Text size="md" fw={600} style={{ color: theme.colors.text, whiteSpace: 'nowrap' }}>
+                  {brideName}
+                </Text>
+              </Flex>
+            </Flex>
           )}
         </Stack>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }
 
