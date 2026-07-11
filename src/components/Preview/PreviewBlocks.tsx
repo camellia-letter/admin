@@ -256,7 +256,7 @@ export function PreviewAccountBlock({
                 </Box>
                 <Box p="md" pt={0}>
                   <Stack gap="sm">
-                    {groomAccounts.slice(0, 2).map((account, index) => (
+                    {groomAccounts.map((account, index) => (
                       <Paper key={index} p="md" shadow="sm" style={{ borderRadius: theme.borderRadius }}>
                         <Flex justify="space-between" align="center" gap="md">
                           <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
@@ -292,7 +292,7 @@ export function PreviewAccountBlock({
                 </Box>
                 <Box p="md" pt={0}>
                   <Stack gap="sm">
-                    {brideAccounts.slice(0, 2).map((account, index) => (
+                    {brideAccounts.map((account, index) => (
                       <Paper key={index} p="md" shadow="sm" style={{ borderRadius: theme.borderRadius }}>
                         <Flex justify="space-between" align="center" gap="md">
                           <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
