@@ -12,6 +12,7 @@ import {
   PreviewHeroBlock,
   PreviewWeddingSummaryBlock,
   PreviewParentsBlock,
+  PreviewSnapUploadBlock,
 } from './PreviewBlocks';
 
 interface InvitationPreviewProps {
@@ -134,6 +135,8 @@ function BlockRenderer({
             return <PreviewGuestbookBlock key={block.id} theme={theme} />;
           case 'RSVP':
             return <PreviewRsvpBlock key={block.id} data={block.data} theme={theme} />;
+          case 'SNAP_UPLOAD':
+            return <PreviewSnapUploadBlock key={block.id} data={block.data} theme={theme} />;
           default:
             return null;
         }

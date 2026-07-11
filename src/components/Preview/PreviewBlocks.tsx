@@ -5,6 +5,7 @@ import type {
   TransportType,
   ParentsBlockData,
 } from '@camellia-letter/shared-types';
+import { Container, Stack, Text, Box, Flex, Divider } from '@mantine/core';
 import { withAlpha } from './themeUtils';
 
 interface ThemeStyles {
@@ -27,23 +28,34 @@ export function PreviewMessageBlock({
   data: { title?: string; content?: string };
   theme: ThemeStyles;
 }) {
-  if (!data.title && !data.content) return null;
+  const hasContent = data.title || data.content;
 
   return (
     <section className="py-8 px-4 max-w-full mx-auto">
       <div className="text-center" style={{ fontFamily: theme.fontFamily }}>
-        {data.title && (
-          <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
-            {data.title}
-          </h2>
-        )}
-        {data.content && (
-          <p
-            className="text-xs leading-relaxed whitespace-pre-line"
-            style={{ color: theme.colors.text, opacity: 0.8 }}
-          >
-            {data.content}
-          </p>
+        {hasContent ? (
+          <>
+            {data.title && (
+              <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
+                {data.title}
+              </h2>
+            )}
+            {data.content && (
+              <p
+                className="text-xs leading-relaxed whitespace-pre-line"
+                style={{ color: theme.colors.text, opacity: 0.8 }}
+              >
+                {data.content}
+              </p>
+            )}
+          </>
+        ) : (
+          <div className="py-4">
+            <span className="text-2xl">💌</span>
+            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
+              인사말을 추가하세요
+            </p>
+          </div>
         )}
       </div>
     </section>
@@ -172,7 +184,6 @@ export function PreviewGalleryBlock({
   theme: ThemeStyles;
 }) {
   const images = data.images || [];
-  if (images.length === 0) return null;
 
   return (
     <section className="py-8 px-4" style={{ fontFamily: theme.fontFamily }}>
@@ -180,31 +191,35 @@ export function PreviewGalleryBlock({
         <h2 className="text-sm font-medium mb-4 text-center" style={{ color: theme.colors.text }}>
           갤러리
         </h2>
-        <div className="grid grid-cols-3 gap-1">
-          {images.slice(0, 6).map((image, index) => (
-            <div
-              key={index}
-              className="aspect-square overflow-hidden"
-              style={{
-                backgroundColor: withAlpha(theme.colors.secondary, 0.2),
-                borderRadius: theme.borderRadius,
-              }}
-            >
-              <img
-                src={image.url}
-                alt={image.caption || `이미지 ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-        {images.length > 6 && (
-          <p
-            className="text-xs text-center mt-2"
-            style={{ color: theme.colors.text, opacity: 0.6 }}
+        {images.length > 0 ? (
+          <div className="grid grid-cols-3 gap-1">
+            {images.map((image, index) => (
+              <div
+                key={index}
+                className="aspect-square overflow-hidden"
+                style={{
+                  backgroundColor: withAlpha(theme.colors.secondary, 0.2),
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <img
+                  src={image.url}
+                  alt={image.caption || `이미지 ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            className="py-8 text-center"
+            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
           >
-            +{images.length - 6}장 더보기
-          </p>
+            <span className="text-2xl">📷</span>
+            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
+              사진을 추가하세요
+            </p>
+          </div>
         )}
       </div>
     </section>
@@ -227,8 +242,7 @@ export function PreviewAccountBlock({
   } = data;
   const hasGroomAccounts = groomAccounts.length > 0;
   const hasBrideAccounts = brideAccounts.length > 0;
-
-  if (!hasGroomAccounts && !hasBrideAccounts) return null;
+  const hasAnyAccounts = hasGroomAccounts || hasBrideAccounts;
 
   return (
     <section
@@ -242,8 +256,9 @@ export function PreviewAccountBlock({
         <h2 className="text-sm font-medium text-center mb-4" style={{ color: theme.colors.text }}>
           마음 전하실 곳
         </h2>
-        <div className="space-y-3">
-          {hasGroomAccounts && (
+        {hasAnyAccounts ? (
+          <div className="space-y-3">
+            {hasGroomAccounts && (
             <div
               className="border p-3 text-center"
               style={{
@@ -277,7 +292,18 @@ export function PreviewAccountBlock({
               </p>
             </div>
           )}
-        </div>
+          </div>
+        ) : (
+          <div
+            className="py-8 text-center"
+            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
+          >
+            <span className="text-2xl">💰</span>
+            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
+              계좌 정보를 추가하세요
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -302,8 +328,7 @@ export function PreviewTransportBlock({
   const { title = '오시는 길 안내', items = [], parkingInfo = '' } = data;
   const hasItems = items.length > 0;
   const hasParkingInfo = parkingInfo && parkingInfo.trim() !== '';
-
-  if (!hasItems && !hasParkingInfo) return null;
+  const hasAnyContent = hasItems || hasParkingInfo;
 
   return (
     <section
@@ -314,8 +339,9 @@ export function PreviewTransportBlock({
         <h2 className="text-sm font-medium text-center mb-4" style={{ color: theme.colors.text }}>
           {title}
         </h2>
-        <div className="space-y-2">
-          {items.slice(0, 3).map((item, index) => (
+        {hasAnyContent ? (
+          <div className="space-y-2">
+            {items.slice(0, 3).map((item, index) => (
             <div
               key={index}
               className="border p-2 flex items-center gap-2"
@@ -351,7 +377,18 @@ export function PreviewTransportBlock({
               </span>
             </div>
           )}
-        </div>
+          </div>
+        ) : (
+          <div
+            className="py-8 text-center"
+            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
+          >
+            <span className="text-2xl">🚗</span>
+            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
+              교통 정보를 추가하세요
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -464,18 +501,36 @@ export function PreviewHeroBlock({
   data: { imageUrl?: string };
   theme: ThemeStyles;
 }) {
-  if (!data.imageUrl) return null;
-
   return (
-    <section className="relative w-full">
-      <div className="relative w-full h-40 overflow-hidden">
-        <img src={data.imageUrl} alt="메인 이미지" className="w-full h-full object-cover" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to bottom, transparent, transparent, ${withAlpha(theme.colors.background, 0.3)})`,
-          }}
-        />
+    <section className="relative w-full" style={{ backgroundColor: theme.colors.background }}>
+      <div className="relative w-full" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+        {data.imageUrl ? (
+          <img
+            src={data.imageUrl}
+            alt="메인 이미지"
+            style={{
+              width: '100%',
+              height: 'auto',
+              objectFit: 'contain',
+              display: 'block',
+              pointerEvents: 'none',
+              userSelect: 'none'
+            }}
+            draggable={false}
+          />
+        ) : (
+          <div
+            className="w-full flex items-center justify-center"
+            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), minHeight: '300px' }}
+          >
+            <div className="text-center">
+              <span className="text-4xl">🖼️</span>
+              <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                메인 이미지를 추가하세요
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -511,19 +566,19 @@ export function PreviewWeddingSummaryBlock({
   const formattedTime = `${period} ${displayHour}시${minutes > 0 ? ` ${minutes}분` : ''}`;
 
   return (
-    <section className="py-6 px-4" style={{ fontFamily: theme.fontFamily }}>
-      <div className="max-w-full mx-auto text-center space-y-2">
-        <p className="text-base font-medium" style={{ color: theme.colors.text }}>
+    <Container size="sm" py={32} style={{ fontFamily: theme.fontFamily }}>
+      <Stack gap="xs" align="center">
+        <Text size="lg" fw={500} ta="center" style={{ color: theme.colors.text }}>
           {groomName} · {brideName}
-        </p>
-        <p className="text-sm" style={{ color: theme.colors.text, opacity: 0.8 }}>
+        </Text>
+        <Text size="md" ta="center" style={{ color: theme.colors.text, opacity: 0.8 }}>
           {formattedDate} {formattedTime}
-        </p>
-        <p className="text-sm" style={{ color: theme.colors.text, opacity: 0.8 }}>
+        </Text>
+        <Text size="md" ta="center" style={{ color: theme.colors.text, opacity: 0.8 }}>
           {venue}
-        </p>
-      </div>
-    </section>
+        </Text>
+      </Stack>
+    </Container>
   );
 }
 
@@ -543,8 +598,7 @@ export function PreviewParentsBlock({
 
   const hasGroomParents = groomFatherName || groomMotherName;
   const hasBrideParents = brideFatherName || brideMotherName;
-
-  if (!hasGroomParents && !hasBrideParents) return null;
+  const hasAnyParents = hasGroomParents || hasBrideParents;
 
   return (
     <section
@@ -552,7 +606,9 @@ export function PreviewParentsBlock({
       style={{ backgroundColor: theme.colors.background, fontFamily: theme.fontFamily }}
     >
       <div className="max-w-full mx-auto space-y-6">
-        {hasGroomParents && (
+        {hasAnyParents ? (
+          <>
+            {hasGroomParents && (
           <div className="flex justify-between items-center gap-2">
             <span className="text-sm" style={{ color: theme.colors.text, minWidth: 50 }}>
               신랑
@@ -631,6 +687,75 @@ export function PreviewParentsBlock({
             </div>
           </div>
         )}
+          </>
+        ) : (
+          <div
+            className="py-8 text-center"
+            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
+          >
+            <span className="text-2xl">👨‍👩‍👧‍👦</span>
+            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
+              부모님 성함을 추가하세요
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// Snap Upload Block
+export function PreviewSnapUploadBlock({
+  data,
+  theme,
+}: {
+  data: { title?: string; description?: string };
+  theme: ThemeStyles;
+}) {
+  const title = data?.title || '스냅 업로드';
+  const description = data?.description || '하객들이 촬영한 사진을 업로드할 수 있습니다.';
+
+  return (
+    <section
+      className="py-8 px-4"
+      style={{
+        background: `linear-gradient(to bottom, ${withAlpha(theme.colors.secondary, 0.15)}, ${theme.colors.background})`,
+        fontFamily: theme.fontFamily,
+      }}
+    >
+      <div className="max-w-full mx-auto text-center">
+        <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
+          {title}
+        </h2>
+        <div
+          className="bg-white shadow-sm p-4"
+          style={{ borderRadius: `calc(${theme.borderRadius} * 2)` }}
+        >
+          <div className="space-y-2">
+            <div
+              className="border-2 border-dashed p-6 flex flex-col items-center gap-2"
+              style={{
+                borderColor: theme.colors.secondary,
+                borderRadius: theme.borderRadius,
+              }}
+            >
+              <span className="text-2xl">📸</span>
+              <p className="text-xs" style={{ color: theme.colors.text, opacity: 0.7 }}>
+                {description}
+              </p>
+            </div>
+            <button
+              disabled
+              className="w-full py-1.5 text-xs text-white"
+              style={{
+                backgroundColor: theme.colors.primary,
+                borderRadius: theme.borderRadius,
+              }}
+            >
+              사진 선택하기
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
