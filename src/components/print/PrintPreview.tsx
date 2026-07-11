@@ -39,8 +39,6 @@ const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
         }
       } catch (err) {
         if (!isCancelled) {
-          // eslint-disable-next-line no-console
-          console.error('PDF 생성 실패:', err);
           setError('PDF 미리보기를 생성하지 못했습니다.');
         }
       } finally {
@@ -121,9 +119,7 @@ const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
             <Document
               file={pdfUrl}
               onLoadSuccess={onDocumentLoadSuccess}
-              onLoadError={(error) => {
-                // eslint-disable-next-line no-console
-                console.error('PDF 로드 실패:', error);
+              onLoadError={() => {
                 setError('PDF를 불러오지 못했습니다.');
               }}
               loading={
