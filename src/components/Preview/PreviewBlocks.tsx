@@ -240,57 +240,80 @@ export function PreviewAccountBlock({
               마음 전하실 곳
             </Title>
           </Stack>
-          {hasAnyAccounts ? (
-            <Stack gap="md">
-              {hasGroomAccounts && (
-                <Paper
-                  p="md"
-                  style={{
-                    backgroundColor: withAlpha(theme.colors.primary, 0.05),
-                    border: `1px solid ${withAlpha(theme.colors.primary, 0.2)}`,
-                    borderRadius: theme.borderRadius,
-                  }}
-                >
-                  <Stack gap="xs" align="center">
-                    <Text size="sm" fw={500} style={{ color: theme.colors.primary }}>
-                      {groomTitle}
-                    </Text>
-                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.7 }}>
-                      {groomAccounts.length}개 계좌
-                    </Text>
+          <Stack gap="md">
+            {hasGroomAccounts && (
+              <Paper
+                style={{
+                  backgroundColor: withAlpha(theme.colors.primary, 0.05),
+                  border: `1px solid ${withAlpha(theme.colors.primary, 0.2)}`,
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <Box p="md">
+                  <Text fw={600} style={{ color: theme.colors.primary }}>
+                    {groomTitle}
+                  </Text>
+                </Box>
+                <Box p="md" pt={0}>
+                  <Stack gap="sm">
+                    {groomAccounts.slice(0, 2).map((account, index) => (
+                      <Paper key={index} p="md" shadow="sm" style={{ borderRadius: theme.borderRadius }}>
+                        <Flex justify="space-between" align="center" gap="md">
+                          <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
+                            <Text size="sm" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                              {account.bank}
+                            </Text>
+                            <Text fw={600} style={{ color: theme.colors.text }}>
+                              {account.accountNumber}
+                            </Text>
+                            <Text size="sm" style={{ color: theme.colors.text, opacity: 0.7 }}>
+                              {account.holder}
+                            </Text>
+                          </Stack>
+                        </Flex>
+                      </Paper>
+                    ))}
                   </Stack>
-                </Paper>
-              )}
-              {hasBrideAccounts && (
-                <Paper
-                  p="md"
-                  style={{
-                    backgroundColor: withAlpha(theme.colors.accent, 0.05),
-                    border: `1px solid ${withAlpha(theme.colors.accent, 0.2)}`,
-                    borderRadius: theme.borderRadius,
-                  }}
-                >
-                  <Stack gap="xs" align="center">
-                    <Text size="sm" fw={500} style={{ color: theme.colors.accent }}>
-                      {brideTitle}
-                    </Text>
-                    <Text size="xs" style={{ color: theme.colors.text, opacity: 0.7 }}>
-                      {brideAccounts.length}개 계좌
-                    </Text>
+                </Box>
+              </Paper>
+            )}
+            {hasBrideAccounts && (
+              <Paper
+                style={{
+                  backgroundColor: withAlpha(theme.colors.accent, 0.05),
+                  border: `1px solid ${withAlpha(theme.colors.accent, 0.2)}`,
+                  borderRadius: theme.borderRadius,
+                }}
+              >
+                <Box p="md">
+                  <Text fw={600} style={{ color: theme.colors.accent }}>
+                    {brideTitle}
+                  </Text>
+                </Box>
+                <Box p="md" pt={0}>
+                  <Stack gap="sm">
+                    {brideAccounts.slice(0, 2).map((account, index) => (
+                      <Paper key={index} p="md" shadow="sm" style={{ borderRadius: theme.borderRadius }}>
+                        <Flex justify="space-between" align="center" gap="md">
+                          <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
+                            <Text size="sm" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                              {account.bank}
+                            </Text>
+                            <Text fw={600} style={{ color: theme.colors.text }}>
+                              {account.accountNumber}
+                            </Text>
+                            <Text size="sm" style={{ color: theme.colors.text, opacity: 0.7 }}>
+                              {account.holder}
+                            </Text>
+                          </Stack>
+                        </Flex>
+                      </Paper>
+                    ))}
                   </Stack>
-                </Paper>
-              )}
-            </Stack>
-          ) : (
-            <Box py="xl" ta="center" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}>
-              <Stack gap="xs" align="center">
-                <Text size="xl">💰</Text>
-                <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
-                  계좌 정보를 추가하세요
-                </Text>
-              </Stack>
-            </Box>
-          )}
+                </Box>
+              </Paper>
+            )}
+          </Stack>
         </Stack>
       </Container>
     </Paper>
@@ -465,7 +488,7 @@ export function PreviewGuestbookBlock({ theme }: { theme: ThemeStyles }) {
 
 // RSVP Block
 export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: ThemeStyles }) {
-  const { title = '참석 여부' } = data;
+  const { title = '참석 여부', description = '참석 여부를 알려주세요.' } = data;
 
   return (
     <Paper
@@ -477,43 +500,119 @@ export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: 
       }}
     >
       <Container size="sm">
-        <Stack gap="lg">
-          <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
-            {title}
-          </Title>
-          <SimpleGrid cols={3} spacing="xs">
-            {['참석', '불참', '미정'].map((label, index) => (
+        <Paper p="xl" shadow="sm" style={{ borderRadius: `calc(${theme.borderRadius} * 2)` }}>
+          <Stack gap="lg">
+            <Stack gap={6} align="center">
+              <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
+                {title}
+              </Title>
+              {description && (
+                <Text size="sm" ta="center" style={{ color: theme.colors.text, opacity: 0.6 }}>
+                  {description}
+                </Text>
+              )}
+            </Stack>
+
+            <Stack gap="md">
+              <Box>
+                <Text size="sm" fw={500} mb="xs" style={{ color: theme.colors.text }}>
+                  이름 *
+                </Text>
+                <input
+                  placeholder="홍길동"
+                  disabled
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    border: `1px solid ${theme.colors.secondary}`,
+                    borderRadius: theme.borderRadius,
+                    fontSize: '14px',
+                  }}
+                />
+              </Box>
+
+              <Box>
+                <Text size="sm" fw={500} mb="xs" style={{ color: theme.colors.text }}>
+                  연락처
+                </Text>
+                <input
+                  placeholder="010-1234-5678"
+                  disabled
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    border: `1px solid ${theme.colors.secondary}`,
+                    borderRadius: theme.borderRadius,
+                    fontSize: '14px',
+                  }}
+                />
+              </Box>
+
+              <Stack gap="xs">
+                <Text size="sm" fw={500} style={{ color: theme.colors.text }}>
+                  참석 여부 *
+                </Text>
+                <SimpleGrid cols={3} spacing="sm">
+                  {[
+                    { label: '참석', emoji: '😊', selected: true },
+                    { label: '불참', emoji: '😢', selected: false },
+                    { label: '미정', emoji: '🤔', selected: false },
+                  ].map((option, index) => (
+                    <Paper
+                      key={index}
+                      p="md"
+                      style={{
+                        cursor: 'pointer',
+                        border: `1px solid ${option.selected ? theme.colors.primary : theme.colors.secondary}`,
+                        backgroundColor: option.selected ? withAlpha(theme.colors.primary, 0.1) : 'transparent',
+                        borderRadius: theme.borderRadius,
+                      }}
+                    >
+                      <Stack gap={4} align="center">
+                        <Text fz={24}>{option.emoji}</Text>
+                        <Text size="sm" style={{ color: theme.colors.text }}>
+                          {option.label}
+                        </Text>
+                      </Stack>
+                    </Paper>
+                  ))}
+                </SimpleGrid>
+              </Stack>
+
+              <Box>
+                <Text size="sm" fw={500} mb="xs" style={{ color: theme.colors.text }}>
+                  축하 메시지 (선택)
+                </Text>
+                <textarea
+                  placeholder="축하 메시지를 남겨주세요"
+                  rows={3}
+                  disabled
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    border: `1px solid ${theme.colors.secondary}`,
+                    borderRadius: theme.borderRadius,
+                    fontSize: '14px',
+                    resize: 'none',
+                  }}
+                />
+              </Box>
+
               <Paper
-                key={index}
-                p="sm"
+                py="sm"
                 style={{
-                  border: `1px solid ${index === 0 ? theme.colors.primary : theme.colors.secondary}`,
-                  backgroundColor: index === 0 ? withAlpha(theme.colors.primary, 0.1) : 'transparent',
+                  backgroundColor: theme.colors.primary,
                   borderRadius: theme.borderRadius,
+                  cursor: 'not-allowed',
                 }}
               >
-                <Stack gap="xs" align="center">
-                  <Text size="lg">{['😊', '😢', '🤔'][index]}</Text>
-                  <Text size="xs" style={{ color: theme.colors.text }}>
-                    {label}
-                  </Text>
-                </Stack>
+                <Text fw={500} ta="center" style={{ color: 'white' }}>
+                  참석 여부 제출
+                </Text>
               </Paper>
-            ))}
-          </SimpleGrid>
-          <Paper
-            py="xs"
-            style={{
-              backgroundColor: theme.colors.primary,
-              borderRadius: theme.borderRadius,
-              cursor: 'not-allowed',
-            }}
-          >
-            <Text size="sm" ta="center" style={{ color: 'white' }}>
-              참석 여부 제출
-            </Text>
-          </Paper>
-        </Stack>
+            </Stack>
+          </Stack>
+        </Paper>
       </Container>
     </Paper>
   );
