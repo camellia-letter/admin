@@ -8,6 +8,7 @@ import type {
 } from '@camellia-letter/shared-types';
 import { Container, Stack, Text, Box, Flex, Divider, Title, Paper, SimpleGrid, AspectRatio } from '@mantine/core';
 import { withAlpha } from './themeUtils';
+import { useEffect, useRef, useState } from 'react';
 
 interface ThemeStyles {
   colors: {
@@ -171,12 +172,57 @@ export function PreviewInfoBlock({
 export function PreviewMapBlock({
   venue,
   venueAddress,
+  venueLat,
+  venueLng,
   theme,
 }: {
   venue: string;
   venueAddress: string;
+  venueLat?: number | null;
+  venueLng?: number | null;
   theme: ThemeStyles;
 }) {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Load Naver Maps script
+    if (!window.naver?.maps) {
+      const script = document.createElement('script');
+      script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${import.meta.env.VITE_NAVER_MAP_CLIENT_ID}`;
+      script.async = true;
+      script.onload = () => setIsLoaded(true);
+      document.head.appendChild(script);
+    } else {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded || !mapRef.current || !window.naver?.maps || !venueLat || !venueLng) return;
+
+    const position = new window.naver.maps.LatLng(venueLat, venueLng);
+
+    const mapInstance = new window.naver.maps.Map(mapRef.current, {
+      center: position,
+      zoom: 16,
+      draggable: false,
+      scrollWheel: false,
+      disableDoubleClickZoom: true,
+      disableDoubleTapZoom: true,
+      disableTwoFingerTapZoom: true,
+      scaleControl: false,
+      logoControl: false,
+      mapDataControl: false,
+      zoomControl: false,
+    });
+
+    new window.naver.maps.Marker({
+      position,
+      map: mapInstance,
+    });
+  }, [isLoaded, venueLat, venueLng]);
+
   return (
     <Container size="sm" py={48}>
       <Stack gap="lg" align="center" style={{ fontFamily: theme.fontFamily }}>
@@ -184,6 +230,32 @@ export function PreviewMapBlock({
           오시는 길
         </Title>
         <Paper shadow="sm" w="100%" style={{ overflow: 'hidden', borderRadius: `calc(${theme.borderRadius} * 2)` }}>
+          {venueLat && venueLng && (
+            <div
+              ref={mapRef}
+              style={{
+                width: '100%',
+                height: '200px',
+                pointerEvents: 'none',
+                backgroundColor: '#f3f4f6',
+              }}
+            >
+              {!isLoaded && (
+                <Flex
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Text size="sm" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                    지도 로딩 중...
+                  </Text>
+                </Flex>
+              )}
+            </div>
+          )}
           <Stack gap="md" p="xl" align="center">
             <Stack gap={4} align="center">
               <Text size="xl" ta="center" style={{ color: theme.colors.text }}>
@@ -488,6 +560,7 @@ export function PreviewGuestbookBlock({ theme }: { theme: ThemeStyles }) {
                 border: `1px solid ${theme.colors.secondary}`,
                 borderRadius: theme.borderRadius,
                 fontSize: '12px',
+                fontFamily: theme.fontFamily,
               }}
             />
             <textarea
@@ -501,6 +574,7 @@ export function PreviewGuestbookBlock({ theme }: { theme: ThemeStyles }) {
                 borderRadius: theme.borderRadius,
                 fontSize: '12px',
                 resize: 'none',
+                fontFamily: theme.fontFamily,
               }}
             />
             <Paper
@@ -563,6 +637,7 @@ export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: 
                     border: `1px solid ${theme.colors.secondary}`,
                     borderRadius: theme.borderRadius,
                     fontSize: '14px',
+                    fontFamily: theme.fontFamily,
                   }}
                 />
               </Box>
@@ -580,6 +655,7 @@ export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: 
                     border: `1px solid ${theme.colors.secondary}`,
                     borderRadius: theme.borderRadius,
                     fontSize: '14px',
+                    fontFamily: theme.fontFamily,
                   }}
                 />
               </Box>
@@ -630,6 +706,7 @@ export function PreviewRsvpBlock({ data, theme }: { data: RsvpBlockData; theme: 
                     borderRadius: theme.borderRadius,
                     fontSize: '14px',
                     resize: 'none',
+                    fontFamily: theme.fontFamily,
                   }}
                 />
               </Box>

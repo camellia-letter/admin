@@ -106,6 +106,8 @@ function BlockRenderer({
                 key={block.id}
                 venue={formData.venue || '예식장'}
                 venueAddress={formData.venueAddress || '주소'}
+                venueLat={formData.venueLat}
+                venueLng={formData.venueLng}
                 theme={theme}
               />
             );
@@ -169,6 +171,8 @@ function FallbackContent({
       <PreviewMapBlock
         venue={formData.venue || '예식장'}
         venueAddress={formData.venueAddress || '주소'}
+        venueLat={formData.venueLat}
+        venueLng={formData.venueLng}
         theme={theme}
       />
     </>
