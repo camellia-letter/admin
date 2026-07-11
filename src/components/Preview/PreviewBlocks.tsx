@@ -5,7 +5,7 @@ import type {
   TransportType,
   ParentsBlockData,
 } from '@camellia-letter/shared-types';
-import { Container, Stack, Text, Box, Flex, Divider, Title, Paper } from '@mantine/core';
+import { Container, Stack, Text, Box, Flex, Divider, Title, Paper, SimpleGrid, AspectRatio } from '@mantine/core';
 import { withAlpha } from './themeUtils';
 
 interface ThemeStyles {
@@ -200,43 +200,44 @@ export function PreviewGalleryBlock({
   const images = data.images || [];
 
   return (
-    <section className="py-8 px-4" style={{ fontFamily: theme.fontFamily }}>
-      <div className="max-w-full mx-auto">
-        <h2 className="text-sm font-medium mb-4 text-center" style={{ color: theme.colors.text }}>
+    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
+      <Stack gap="lg">
+        <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
           갤러리
-        </h2>
+        </Title>
         {images.length > 0 ? (
-          <div className="grid grid-cols-3 gap-1">
+          <SimpleGrid cols={3} spacing="sm">
             {images.map((image, index) => (
-              <div
-                key={index}
-                className="aspect-square overflow-hidden"
-                style={{
-                  backgroundColor: withAlpha(theme.colors.secondary, 0.2),
-                  borderRadius: theme.borderRadius,
-                }}
-              >
-                <img
-                  src={image.url}
-                  alt={image.caption || `이미지 ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <AspectRatio key={index} ratio={1}>
+                <Paper
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    backgroundColor: withAlpha(theme.colors.secondary, 0.2),
+                    borderRadius: theme.borderRadius,
+                  }}
+                >
+                  <img
+                    src={image.url}
+                    alt={image.caption || `이미지 ${index + 1}`}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </Paper>
+              </AspectRatio>
             ))}
-          </div>
+          </SimpleGrid>
         ) : (
-          <div
-            className="py-8 text-center"
-            style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}
-          >
-            <span className="text-2xl">📷</span>
-            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
-              사진을 추가하세요
-            </p>
-          </div>
+          <Box py="xl" ta="center" style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.1), borderRadius: theme.borderRadius }}>
+            <Stack gap="xs" align="center">
+              <Text size="xl">📷</Text>
+              <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                사진을 추가하세요
+              </Text>
+            </Stack>
+          </Box>
         )}
-      </div>
-    </section>
+      </Stack>
+    </Container>
   );
 }
 
