@@ -5,7 +5,7 @@ import type {
   TransportType,
   ParentsBlockData,
 } from '@camellia-letter/shared-types';
-import { Container, Stack, Text, Box, Flex, Divider } from '@mantine/core';
+import { Container, Stack, Text, Box, Flex, Divider, Title } from '@mantine/core';
 import { withAlpha } from './themeUtils';
 
 interface ThemeStyles {
@@ -31,34 +31,40 @@ export function PreviewMessageBlock({
   const hasContent = data.title || data.content;
 
   return (
-    <section className="py-8 px-4 max-w-full mx-auto">
-      <div className="text-center" style={{ fontFamily: theme.fontFamily }}>
+    <Container size="sm" py={48} style={{ fontFamily: theme.fontFamily }}>
+      <Stack gap="lg" align="center">
         {hasContent ? (
           <>
             {data.title && (
-              <h2 className="text-sm font-medium mb-4" style={{ color: theme.colors.text }}>
+              <Title order={2} size="h3" ta="center" style={{ color: theme.colors.text }}>
                 {data.title}
-              </h2>
+              </Title>
             )}
             {data.content && (
-              <p
-                className="text-xs leading-relaxed whitespace-pre-line"
-                style={{ color: theme.colors.text, opacity: 0.8 }}
+              <Text
+                ta="center"
+                style={{
+                  color: theme.colors.text,
+                  lineHeight: 1.8,
+                  whiteSpace: 'pre-line'
+                }}
               >
                 {data.content}
-              </p>
+              </Text>
             )}
           </>
         ) : (
-          <div className="py-4">
-            <span className="text-2xl">💌</span>
-            <p className="text-xs mt-2" style={{ color: theme.colors.text, opacity: 0.5 }}>
-              인사말을 추가하세요
-            </p>
-          </div>
+          <Box py="lg">
+            <Stack gap="xs" align="center">
+              <Text size="xl">💌</Text>
+              <Text size="xs" style={{ color: theme.colors.text, opacity: 0.5 }}>
+                인사말을 추가하세요
+              </Text>
+            </Stack>
+          </Box>
         )}
-      </div>
-    </section>
+      </Stack>
+    </Container>
   );
 }
 
