@@ -20,7 +20,7 @@ interface InvitationPreviewProps {
   formData: UpdateInvitationDto;
 }
 
-export default function InvitationPreview({ formData }: InvitationPreviewProps) {
+export const InvitationPreview = ({ formData }: InvitationPreviewProps) => {
   const theme = getThemeStyles(formData.theme);
   const blocks = formData.blocks || [];
 
@@ -40,10 +40,10 @@ export default function InvitationPreview({ formData }: InvitationPreviewProps) 
       )}
     </div>
   );
-}
+};
 
 // Block Renderer
-function BlockRenderer({
+const BlockRenderer = ({
   blocks,
   formData,
   theme,
@@ -51,7 +51,7 @@ function BlockRenderer({
   blocks: InvitationBlock[];
   formData: UpdateInvitationDto;
   theme: ReturnType<typeof getThemeStyles>;
-}) {
+}) => {
   const sortedBlocks = [...blocks].sort((a, b) => a.order - b.order);
 
   return (
@@ -135,13 +135,13 @@ function BlockRenderer({
 }
 
 // Fallback content when no blocks
-function FallbackContent({
+const FallbackContent = ({
   formData,
   theme,
 }: {
   formData: UpdateInvitationDto;
   theme: ReturnType<typeof getThemeStyles>;
-}) {
+}) => {
   return (
     <>
       {/* Message Section */}

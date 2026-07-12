@@ -32,7 +32,7 @@ const mealLabels: Record<string, string> = {
   none: '식사 안함',
 };
 
-export default function RsvpManagement({ invitationId }: RsvpManagementProps) {
+export const RsvpManagement = ({ invitationId }: RsvpManagementProps) => {
   const { data: rsvps, isLoading, error } = useRsvps(invitationId);
   const { data: stats } = useRsvpStats(invitationId);
   const { mutate: deleteRsvp, isPending: isDeleting } = useDeleteRsvp();

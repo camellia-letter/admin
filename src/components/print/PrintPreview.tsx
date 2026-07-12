@@ -12,7 +12,7 @@ interface PrintPreviewProps {
   config: PrintInvitationConfig;
 }
 
-const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
+export const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -153,5 +153,3 @@ const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
     </Paper>
   );
 };
-
-export default PrintPreview;

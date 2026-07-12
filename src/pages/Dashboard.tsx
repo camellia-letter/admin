@@ -30,7 +30,7 @@ import { useToast } from '@/hooks/useNotifications';
 import { AppAlertDialog } from '@/components/ui/AppAlertDialog';
 import type { Invitation } from '@camellia-letter/shared-types';
 
-const StatsModal = lazy(() => import('@/components/StatsModal'));
+const StatsModal = lazy(() => import('@/components/StatsModal').then((m) => ({ default: m.StatsModal })));
 
 export default function Dashboard() {
   const navigate = useNavigate();

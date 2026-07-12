@@ -4,8 +4,8 @@ import { Stack, Flex, Title, Text, Button, Alert, Loader, Grid, Anchor } from '@
 import { IconArrowLeft } from '@tabler/icons-react';
 import { DEFAULT_PRINT_INVITATION_CONFIG } from '@camellia-letter/shared-types';
 import type { PrintInvitationConfig } from '@camellia-letter/shared-types';
-import PrintConfigPanel from '@/components/print/PrintConfigPanel';
-import PrintPreview from '@/components/print/PrintPreview';
+import { PrintConfigPanel } from '@/components/print/PrintConfigPanel';
+import { PrintPreview } from '@/components/print/PrintPreview';
 import { getPrintConfig, savePrintConfig, downloadPrintPDF } from '@/api/print-invitation';
 
 export default function PrintDesignEditor() {

@@ -8,7 +8,7 @@ interface GuestbookManagementProps {
   invitationId: string;
 }
 
-export default function GuestbookManagement({ invitationId }: GuestbookManagementProps) {
+export const GuestbookManagement = ({ invitationId }: GuestbookManagementProps) => {
   const { data: guestbooks, isLoading, error } = useGuestbooks(invitationId);
   const { mutate: updateGuestbook } = useUpdateGuestbook();
   const { mutate: deleteGuestbook } = useDeleteGuestbook();

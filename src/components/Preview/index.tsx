@@ -1,2 +1,2 @@
-export { default as InvitationPreview } from './InvitationPreview';
+export { InvitationPreview } from './InvitationPreview';
 export * from './themeUtils';

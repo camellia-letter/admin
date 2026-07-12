@@ -13,7 +13,7 @@ interface StatsModalProps {
   invitation: Invitation;
 }
 
-export default function StatsModal({ isOpen, onClose, invitation }: StatsModalProps) {
+export const StatsModal = ({ isOpen, onClose, invitation }: StatsModalProps) => {
   const { data: stats, isLoading } = useInvitationStats(invitation.id);
   const [activeTab, setActiveTab] = useState<string | null>('overview');
   const [currentPage, setCurrentPage] = useState(1);

@@ -26,8 +26,8 @@ import type {
 import { BlockEditor } from '@/components/BlockEditor';
 import { ThemeEditor } from '@/components/ThemeEditor';
 import { InvitationPreview } from '@/components/Preview';
-import GuestbookManagement from '@/components/GuestbookManagement';
-import RsvpManagement from '@/components/RsvpManagement';
+import { GuestbookManagement } from '@/components/GuestbookManagement';
+import { RsvpManagement } from '@/components/RsvpManagement';
 import { useToast } from '@/hooks/useNotifications';
 
 // 디바이스 프리셋

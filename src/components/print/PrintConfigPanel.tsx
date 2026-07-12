@@ -25,7 +25,7 @@ interface PrintConfigPanelProps {
   onChange: (config: PrintInvitationConfig) => void;
 }
 
-const PrintConfigPanel = ({ config, onChange }: PrintConfigPanelProps) => {
+export const PrintConfigPanel = ({ config, onChange }: PrintConfigPanelProps) => {
   const updateConfig = (updates: Partial<PrintInvitationConfig>) => {
     onChange({ ...config, ...updates });
   };
@@ -313,5 +313,3 @@ const PrintConfigPanel = ({ config, onChange }: PrintConfigPanelProps) => {
     </Paper>
   );
 };
-
-export default PrintConfigPanel;
