@@ -3,7 +3,7 @@ import type { InvitationBlock, BlockType, BlockDataByType } from '@camellia-lett
 /**
  * 블록 타입별 기본 데이터를 생성합니다
  */
-function getDefaultBlockData(type: BlockType): BlockDataByType[BlockType] {
+const getDefaultBlockData = (type: BlockType): BlockDataByType[BlockType] => {
   switch (type) {
     case 'HEADER':
       return {
@@ -69,7 +69,7 @@ function getDefaultBlockData(type: BlockType): BlockDataByType[BlockType] {
 /**
  * 새로운 블록을 생성합니다
  */
-export function createDefaultBlock(type: BlockType, order: number): InvitationBlock {
+export const createDefaultBlock = (type: BlockType, order: number): InvitationBlock => {
   return {
     id: crypto.randomUUID(),
     type,
@@ -81,11 +81,11 @@ export function createDefaultBlock(type: BlockType, order: number): InvitationBl
 /**
  * 블록 배열의 순서를 재정렬합니다 (드래그 앤 드롭 후)
  */
-export function reorderBlocks(
+export const reorderBlocks = (
   blocks: InvitationBlock[],
   startIndex: number,
   endIndex: number,
-): InvitationBlock[] {
+): InvitationBlock[] => {
   const result = Array.from(blocks);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -100,7 +100,7 @@ export function reorderBlocks(
 /**
  * 블록 타입의 한글 라벨을 반환합니다
  */
-export function getBlockLabel(type: BlockType): string {
+export const getBlockLabel = (type: BlockType): string => {
   const labels: Record<BlockType, string> = {
     HEADER: '헤더',
     HERO: '메인 이미지',
@@ -122,7 +122,7 @@ export function getBlockLabel(type: BlockType): string {
 /**
  * 블록 타입의 설명을 반환합니다
  */
-export function getBlockDescription(type: BlockType): string {
+export const getBlockDescription = (type: BlockType): string => {
   const descriptions: Record<BlockType, string> = {
     HEADER: '신랑 신부 이름과 타이틀을 표시합니다',
     HERO: '상단 메인 이미지를 추가합니다',
@@ -144,7 +144,7 @@ export function getBlockDescription(type: BlockType): string {
 /**
  * 블록 데이터의 유효성을 검증합니다
  */
-export function validateBlockData(block: InvitationBlock): { valid: boolean; error?: string } {
+export const validateBlockData = (block: InvitationBlock): { valid: boolean; error?: string } => {
   switch (block.type) {
     case 'HERO':
       if (!block.data.imageUrl) {
@@ -202,7 +202,7 @@ export function validateBlockData(block: InvitationBlock): { valid: boolean; err
 /**
  * 모든 블록의 유효성을 검증합니다
  */
-export function validateAllBlocks(blocks: InvitationBlock[]): { valid: boolean; errors: string[] } {
+export const validateAllBlocks = (blocks: InvitationBlock[]): { valid: boolean; errors: string[] } => {
   const errors: string[] = [];
 
   blocks.forEach((block, index) => {
