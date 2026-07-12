@@ -160,7 +160,7 @@ export default function Dashboard() {
   );
 }
 
-const InvitationCard = memo(function InvitationCard({ invitation }: { invitation: Invitation }) {
+const InvitationCard = memo(({ invitation }: { invitation: Invitation }) => {
   const [showStats, setShowStats] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [copied, setCopied] = useState(false);

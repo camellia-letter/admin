@@ -100,7 +100,7 @@ const DEFAULT_GRADIENT: GradientConfig = {
 
 // 그라디언트 CSS 생성
 const getGradientCSS = (gradient: GradientConfig): string => {
-  if (!gradient.enabled) return '';
+  if (!gradient.enabled) {return '';}
 
   const directionMap: Record<GradientConfig['direction'], string> = {
     'to-b': '180deg',
@@ -170,7 +170,7 @@ export const ThemeEditor = ({ theme, onChange }: ThemeEditorProps) => {
   // 테마 가져오기
   const handleImportTheme = useCallback(
     (selectedFile: File | null) => {
-      if (!selectedFile) return;
+      if (!selectedFile) {return;}
 
       const reader = new FileReader();
       reader.onload = (event) => {

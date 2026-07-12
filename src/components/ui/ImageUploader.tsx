@@ -57,7 +57,7 @@ export const ImageUploader = ({
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files || files.length === 0) return;
+    if (!files || files.length === 0) {return;}
 
     setUploading(true);
     try {
@@ -82,7 +82,7 @@ export const ImageUploader = ({
   };
 
   const moveUp = (index: number) => {
-    if (!values || !onMultipleChange || index === 0) return;
+    if (!values || !onMultipleChange || index === 0) {return;}
 
     const newValues = [...values];
     [newValues[index - 1], newValues[index]] = [newValues[index], newValues[index - 1]];
@@ -90,7 +90,7 @@ export const ImageUploader = ({
   };
 
   const moveDown = (index: number) => {
-    if (!values || !onMultipleChange || index === values.length - 1) return;
+    if (!values || !onMultipleChange || index === values.length - 1) {return;}
 
     const newValues = [...values];
     [newValues[index], newValues[index + 1]] = [newValues[index + 1], newValues[index]];
@@ -98,7 +98,7 @@ export const ImageUploader = ({
   };
 
   const removeImage = (index: number) => {
-    if (!values || !onMultipleChange) return;
+    if (!values || !onMultipleChange) {return;}
 
     const newValues = values.filter((_, i) => i !== index);
     onMultipleChange(newValues);

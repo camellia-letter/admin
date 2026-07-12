@@ -111,7 +111,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
   // blocks prop이 변경될 때 상태 동기화 (외부 업데이트만)
   useEffect(() => {
     // 자체 onChange로 인한 변경은 무시
-    if (prevBlocksRef.current === blocks) return;
+    if (prevBlocksRef.current === blocks) {return;}
     prevBlocksRef.current = blocks;
 
     isExternalUpdateRef.current = true;
@@ -160,7 +160,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
 
   // 상태 변경 시 onChange 호출 (외부 업데이트 시에는 호출하지 않음)
   useEffect(() => {
-    if (isExternalUpdateRef.current) return;
+    if (isExternalUpdateRef.current) {return;}
 
     const newBlocks = buildBlocks();
     prevBlocksRef.current = newBlocks;
@@ -169,7 +169,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
 
   // 상태를 히스토리에 저장
   const saveToHistory = useCallback(() => {
-    if (isRestoringRef.current) return;
+    if (isRestoringRef.current) {return;}
 
     pushState({
       enabledBlocks: Array.from(enabledBlocks),
@@ -186,7 +186,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
       setEnabledBlocks(new Set(prevState.enabledBlocks));
       setBlockData(prevState.blockData);
       setBlockOrder(prevState.blockOrder);
-      if (restoreTimeoutRef.current) clearTimeout(restoreTimeoutRef.current);
+      if (restoreTimeoutRef.current) {clearTimeout(restoreTimeoutRef.current);}
       restoreTimeoutRef.current = setTimeout(() => {
         isRestoringRef.current = false;
       }, 0);
@@ -201,7 +201,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
       setEnabledBlocks(new Set(nextState.enabledBlocks));
       setBlockData(nextState.blockData);
       setBlockOrder(nextState.blockOrder);
-      if (restoreTimeoutRef.current) clearTimeout(restoreTimeoutRef.current);
+      if (restoreTimeoutRef.current) {clearTimeout(restoreTimeoutRef.current);}
       restoreTimeoutRef.current = setTimeout(() => {
         isRestoringRef.current = false;
       }, 0);
@@ -335,7 +335,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
     setBlockOrder(template.blockOrder);
     setExpandedBlocks(new Set(template.enabledBlocks));
     setShowTemplateList(false);
-    if (restoreTimeoutRef.current) clearTimeout(restoreTimeoutRef.current);
+    if (restoreTimeoutRef.current) {clearTimeout(restoreTimeoutRef.current);}
     restoreTimeoutRef.current = setTimeout(() => {
       isRestoringRef.current = false;
     }, 0);
@@ -348,7 +348,7 @@ export const BlockEditor = ({ blocks, onChange }: BlockEditorProps) => {
   };
 
   const handleConfirmDeleteTemplate = () => {
-    if (!deleteTemplateId) return;
+    if (!deleteTemplateId) {return;}
     deleteTemplate(deleteTemplateId);
   };
 

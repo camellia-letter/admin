@@ -65,7 +65,7 @@ export function PreviewMessageBlock({
   data: { title?: string; content?: string };
   theme: ThemeStyles;
 }) {
-  if (!data.title && !data.content) return null;
+  if (!data.title && !data.content) {return null;}
 
   return (
     <Container size="sm" py={48}>
@@ -199,7 +199,7 @@ export function PreviewMapBlock({
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !mapRef.current || !window.naver?.maps || !venueLat || !venueLng) return;
+    if (!isLoaded || !mapRef.current || !window.naver?.maps || !venueLat || !venueLng) {return;}
 
     const position = new window.naver.maps.LatLng(venueLat, venueLng);
 
@@ -282,7 +282,7 @@ export function PreviewGalleryBlock({
 }) {
   const images = data.images || [];
 
-  if (images.length === 0) return null;
+  if (images.length === 0) {return null;}
 
   return (
     <Container size="lg" py={48} style={{ fontFamily: theme.fontFamily }}>
@@ -838,7 +838,7 @@ export function PreviewParentsBlock({
   const hasBrideParents = brideFatherName || brideMotherName;
   const hasAnyParents = hasGroomParents || hasBrideParents;
 
-  if (!hasAnyParents) return null;
+  if (!hasAnyParents) {return null;}
 
   return (
     <Box py={48} style={{ backgroundColor: withAlpha(theme.colors.secondary, 0.15) }}>

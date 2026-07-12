@@ -72,10 +72,10 @@ export async function getAllInvitations(
   params: GetAllInvitationsParams = {},
 ): Promise<PaginatedInvitationsResponse> {
   const searchParams = new URLSearchParams();
-  if (params.page) searchParams.set('page', params.page.toString());
-  if (params.limit) searchParams.set('limit', params.limit.toString());
-  if (params.search) searchParams.set('search', params.search);
-  if (params.hasConfig !== undefined) searchParams.set('hasConfig', params.hasConfig.toString());
+  if (params.page) {searchParams.set('page', params.page.toString());}
+  if (params.limit) {searchParams.set('limit', params.limit.toString());}
+  if (params.search) {searchParams.set('search', params.search);}
+  if (params.hasConfig !== undefined) {searchParams.set('hasConfig', params.hasConfig.toString());}
 
   const url = `/api/admin/invitations${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
   const response = await apiClient.get(url);

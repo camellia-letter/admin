@@ -32,7 +32,7 @@ export const GuestbookManagement = ({ invitationId }: GuestbookManagementProps) 
   };
 
   const handleConfirmDelete = () => {
-    if (!deleteTargetId) return;
+    if (!deleteTargetId) {return;}
 
     setDeletingId(deleteTargetId);
     deleteGuestbook(deleteTargetId, {

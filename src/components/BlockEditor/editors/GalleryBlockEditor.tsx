@@ -156,7 +156,7 @@ export const GalleryBlockEditor = ({ data, onChange }: GalleryBlockEditorProps) 
 
   const handleMove = (index: number, direction: -1 | 1) => {
     const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= images.length) return;
+    if (targetIndex < 0 || targetIndex >= images.length) {return;}
     const newImages = [...images];
     const [removed] = newImages.splice(index, 1);
     newImages.splice(targetIndex, 0, removed);

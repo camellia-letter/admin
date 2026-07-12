@@ -24,8 +24,8 @@ export const AppDialog = ({
 }: AppDialogProps) => {
   const opened = isOpen ?? open ?? false;
   const handleClose = () => {
-    if (onClose) onClose();
-    if (onOpenChange) onOpenChange(false);
+    if (onClose) {onClose();}
+    if (onOpenChange) {onOpenChange(false);}
   };
 
   return (

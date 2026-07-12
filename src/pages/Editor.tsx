@@ -195,7 +195,7 @@ export default function Editor() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!id) return;
+    if (!id) {return;}
 
     // slug가 변경되었고 사용 불가능한 경우 제출 방지
     if (formData.slug && formData.slug !== invitation?.slug && slugStatus.available === false) {

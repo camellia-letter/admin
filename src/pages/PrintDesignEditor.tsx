@@ -45,7 +45,7 @@ export default function PrintDesignEditor() {
 
   // 설정 저장
   const handleSave = async () => {
-    if (!id) return;
+    if (!id) {return;}
 
     setIsSaving(true);
     setSaveMessage(null);
@@ -64,7 +64,7 @@ export default function PrintDesignEditor() {
 
   // PDF 다운로드
   const handleDownload = async () => {
-    if (!id) return;
+    if (!id) {return;}
 
     setIsDownloading(true);
     setError(null);

@@ -248,7 +248,7 @@ export const BlockSelector = ({
 
   const handleMove = (index: number, direction: -1 | 1) => {
     const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= orderedTypes.length) return;
+    if (targetIndex < 0 || targetIndex >= orderedTypes.length) {return;}
     const newOrder = [...orderedTypes];
     const [removed] = newOrder.splice(index, 1);
     newOrder.splice(targetIndex, 0, removed);

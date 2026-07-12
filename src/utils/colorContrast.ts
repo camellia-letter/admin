@@ -43,7 +43,7 @@ export function getContrastRatio(color1: string, color2: string): number {
   const rgb1 = hexToRgb(color1);
   const rgb2 = hexToRgb(color2);
 
-  if (!rgb1 || !rgb2) return 1;
+  if (!rgb1 || !rgb2) {return 1;}
 
   const l1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
   const l2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);

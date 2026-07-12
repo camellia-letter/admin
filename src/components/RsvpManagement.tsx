@@ -43,7 +43,7 @@ export const RsvpManagement = ({ invitationId }: RsvpManagementProps) => {
   };
 
   const handleConfirmDelete = () => {
-    if (!deleteTarget) return;
+    if (!deleteTarget) {return;}
     deleteRsvp(deleteTarget.id);
   };
 
