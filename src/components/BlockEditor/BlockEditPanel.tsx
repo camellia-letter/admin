@@ -14,6 +14,8 @@ import { AccountBlockEditor } from '@/components/BlockEditor/editors/AccountBloc
 import { TransportBlockEditor } from '@/components/BlockEditor/editors/TransportBlockEditor';
 import { RsvpBlockEditor } from '@/components/BlockEditor/editors/RsvpBlockEditor';
 import { ParentsBlockEditor } from '@/components/BlockEditor/editors/ParentsBlockEditor';
+import { HeaderBlockEditor } from '@/components/BlockEditor/editors/HeaderBlockEditor';
+import { SnapUploadBlockEditor } from '@/components/BlockEditor/editors/SnapUploadBlockEditor';
 
 interface BlockEditPanelProps {
   block: InvitationBlock;
@@ -35,6 +37,8 @@ function BlockEditPanelComponent({
 
   const renderEditor = () => {
     switch (block.type) {
+      case 'HEADER':
+        return <HeaderBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />;
       case 'HERO':
         return <HeroBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />;
       case 'WEDDING_SUMMARY':
@@ -69,6 +73,8 @@ function BlockEditPanelComponent({
         );
       case 'RSVP':
         return <RsvpBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />;
+      case 'SNAP_UPLOAD':
+        return <SnapUploadBlockEditor blockId={block.id} data={block.data} onChange={handleDataChange} />;
       default:
         return <div>Unknown block type: {(block as { type: string }).type}</div>;
     }
