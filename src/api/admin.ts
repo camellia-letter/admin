@@ -100,3 +100,71 @@ export async function getPrintInvitationStats(): Promise<PrintInvitationStatsRes
   const response = await apiClient.get('/api/admin/print-invitations/stats');
   return response.data;
 }
+
+/**
+ * User Management API
+ */
+
+export type UserStatus = 'PENDING' | 'ACTIVE' | 'REJECTED';
+
+export interface AdminUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
+  status: UserStatus;
+  role: string;
+  createdAt: Date;
+  approvedBy: string | null;
+  approvedAt: Date | null;
+  rejectedBy: string | null;
+  rejectedAt: Date | null;
+  rejectionReason: string | null;
+}
+
+export interface GetUsersParams {
+  status?: UserStatus;
+  page?: number;
+  limit?: number;
+}
+
+export interface PaginatedUsersResponse {
+  message: string;
+  data: {
+    users: AdminUser[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+/**
+ * 사용자 목록 조회 (관리자)
+ */
+export const getUsers = async (params: GetUsersParams = {}): Promise<PaginatedUsersResponse> => {
+  const searchParams = new URLSearchParams();
+  if (params.status) {searchParams.set('status', params.status);}
+  if (params.page) {searchParams.set('page', params.page.toString());}
+  if (params.limit) {searchParams.set('limit', params.limit.toString());}
+
+  const url = `/api/admin/users${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+  const response = await apiClient.get(url);
+  return response.data;
+};
+
+/**
+ * 사용자 승인 (관리자)
+ */
+export const approveUser = async (userId: string): Promise<{ message: string; data: AdminUser }> => {
+  const response = await apiClient.post(`/api/admin/users/${userId}/approve`);
+  return response.data;
+};
+
+/**
+ * 사용자 거부 (관리자)
+ */
+export const rejectUser = async (userId: string, reason: string): Promise<{ message: string; data: AdminUser }> => {
+  const response = await apiClient.post(`/api/admin/users/${userId}/reject`, { reason });
+  return response.data;
+};

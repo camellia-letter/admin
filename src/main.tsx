@@ -22,6 +22,7 @@ const Editor = lazy(() => import('./pages/Editor'));
 const Settings = lazy(() => import('./pages/Settings'));
 const PrintDesignEditor = lazy(() => import('./pages/PrintDesignEditor'));
 const PrintInvitationsList = lazy(() => import('./pages/PrintInvitationsList'));
+const Users = lazy(() => import('./pages/Users'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -90,6 +91,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/invitations/:id/print" element={<PrintDesignEditor />} />
                     <Route path="/admin/print-invitations" element={<PrintInvitationsList />} />
+                    <Route path="/admin/users" element={<Users />} />
                   </Routes>
                 </Suspense>
               </AuthProvider>
