@@ -70,6 +70,8 @@ export default function Editor() {
     rsvpViewPassword: undefined,
   });
 
+  const [isRsvpPasswordChanged, setIsRsvpPasswordChanged] = useState(false);
+
   const [weddingDateValue, setWeddingDateValue] = useState<Date | null>(null);
 
   const [slugStatus, setSlugStatus] = useState<{
@@ -143,6 +145,12 @@ export default function Editor() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
+    // RSVP 비밀번호 필드 변경 추적
+    if (name === 'rsvpViewPassword') {
+      setIsRsvpPasswordChanged(true);
+    }
+
     setFormData((prev: UpdateInvitationDto) => ({ ...prev, [name]: value }));
   };
 
@@ -204,17 +212,22 @@ export default function Editor() {
     }
 
     // 빈 문자열인 경우 null로 처리
-    const submitData = {
+    const submitData: UpdateInvitationDto = {
       ...formData,
       slug: formData.slug?.trim() || null,
-      rsvpViewPassword: formData.rsvpViewPassword?.trim() || null,
     };
+
+    // RSVP 비밀번호는 변경된 경우에만 포함 (변경되지 않으면 기존 값 유지)
+    if (isRsvpPasswordChanged) {
+      submitData.rsvpViewPassword = formData.rsvpViewPassword?.trim() || null;
+    }
 
     updateInvitation(
       { id, dto: submitData },
       {
         onSuccess: () => {
           addToast('success', '청첩장이 수정되었습니다.');
+          setIsRsvpPasswordChanged(false); // 저장 후 변경 플래그 초기화
         },
       },
     );
@@ -433,8 +446,12 @@ export default function Editor() {
                     name="rsvpViewPassword"
                     value={formData.rsvpViewPassword || ''}
                     onChange={handleChange}
-                    placeholder="비밀번호를 입력하세요 (선택사항)"
-                    description="비어있으면 누구나 RSVP 목록을 조회할 수 있습니다."
+                    placeholder="새 비밀번호를 입력하세요 (선택사항)"
+                    description={
+                      isRsvpPasswordChanged
+                        ? '비밀번호가 변경됩니다. 빈 값으로 저장하면 비밀번호가 제거됩니다.'
+                        : '변경하지 않으면 기존 설정이 유지됩니다. 새 비밀번호를 입력하거나 비워두고 저장하면 비밀번호가 제거됩니다.'
+                    }
                   />
                   {invitation && (
                     <Text size="sm" c="dimmed">
