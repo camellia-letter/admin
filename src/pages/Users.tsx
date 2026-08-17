@@ -82,7 +82,7 @@ export default function Users() {
   };
 
   const handleRejectConfirm = () => {
-    if (!rejectModal.userId) return;
+    if (!rejectModal.userId) {return;}
 
     if (!rejectionReason.trim()) {
       addToast('error', '거부 사유를 입력해주세요.');

@@ -7,7 +7,7 @@ import {
   validateBlockData,
   validateAllBlocks,
 } from './blockHelpers';
-import type { InvitationBlock, BlockType } from '@camellia-letter/shared-types';
+import type { InvitationBlock } from '@camellia-letter/shared-types';
 
 describe('blockHelpers', () => {
   describe('createDefaultBlock', () => {

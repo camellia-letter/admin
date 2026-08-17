@@ -121,7 +121,7 @@ export function PreviewInfoBlock({
   const diffTime = wedding.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  let ddayText = '';
+  let ddayText: string;
   if (diffDays > 0) {
     ddayText = `D-${diffDays}`;
   } else if (diffDays === 0) {
@@ -331,7 +331,6 @@ export function PreviewAccountBlock({
   } = data;
   const hasGroomAccounts = groomAccounts.length > 0;
   const hasBrideAccounts = brideAccounts.length > 0;
-  const hasAnyAccounts = hasGroomAccounts || hasBrideAccounts;
 
   return (
     <Paper

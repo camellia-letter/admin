@@ -12,12 +12,18 @@ Before ANY action:
 
 ## 🧠 Project Overview
 
-This is a structured monorepo project:
+This is the **admin application** (Vite + React).
 
-- apps/web (Next.js)
-- apps/admin (Vite + React)
-- apps/api (NestJS)
-- packages/shared (shared types & utils)
+프로젝트는 모노레포가 아니라 **독립된 4개의 git 저장소**로 구성된다:
+
+- `web` (Next.js) — 사용자용 청첩장
+- `admin` (Vite + React) — 이 저장소
+- `api` (NestJS) — API 서버
+- `types` (`@camellia-letter/shared-types`) — GitHub Packages로 배포되는 공유 타입 패키지
+
+공유 타입은 소스 참조가 아니라 **npm 패키지로 설치**해서 사용한다.
+따라서 타입 변경은 `types` 저장소에서 버전을 올려 배포한 뒤,
+각 저장소에서 재설치해야 반영된다.
 
 Architecture consistency is critical.
 
@@ -58,7 +64,7 @@ After changes, ALWAYS run:
 
 Do NOT modify unless explicitly asked:
 
-- packages/shared/\*\*
+- `@camellia-letter/shared-types` 패키지 내용 (별도 `types` 저장소에서 관리)
 - authentication logic
 - query key structure
 - block system types

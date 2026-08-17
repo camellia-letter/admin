@@ -70,18 +70,18 @@ export default function PrintInvitationsList() {
     loadInvitations();
   }, [loadInvitations]);
 
-  useEffect(() => {
-    loadStats();
-  }, []);
-
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     try {
       const response = await getPrintInvitationStats();
       setStats(response.data);
     } catch {
       // Failed to load stats
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

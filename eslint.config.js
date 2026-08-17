@@ -28,7 +28,8 @@ export default [
       },
       parser: tsParser,
       parserOptions: {
-        project: ['./tsconfig.json'],
+        // 빌드용 tsconfig는 테스트 파일을 제외하므로 lint 전용 tsconfig를 사용한다
+        project: ['./tsconfig.eslint.json'],
         ecmaFeatures: {
           jsx: true,
         },

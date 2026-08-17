@@ -37,7 +37,7 @@ export const PrintPreview = ({ invitationId, config }: PrintPreviewProps) => {
           const url = URL.createObjectURL(blob);
           setPdfUrl(url);
         }
-      } catch (err) {
+      } catch {
         if (!isCancelled) {
           setError('PDF 미리보기를 생성하지 못했습니다.');
         }
