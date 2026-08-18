@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Stack,
@@ -19,69 +19,31 @@ import {
   Pagination,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-import { getAllInvitations, getPrintInvitationStats } from '../api/admin';
-import type { AdminInvitation, PrintInvitationStatsResponse } from '../api/admin';
+import { usePrintInvitations, usePrintInvitationStats } from '@/hooks/usePrintInvitations';
 
 export default function PrintInvitationsList() {
-  const [invitations, setInvitations] = useState<AdminInvitation[]>([]);
-  const [stats, setStats] = useState<PrintInvitationStatsResponse['data'] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [total, setTotal] = useState(0);
   const limit = 20;
 
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [hasConfigFilter, setHasConfigFilter] = useState<'all' | 'true' | 'false'>('all');
 
-  const loadInvitations = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  const invitationsQuery = usePrintInvitations({
+    page,
+    limit,
+    ...(search ? { search } : {}),
+    ...(hasConfigFilter !== 'all' ? { hasConfig: hasConfigFilter === 'true' } : {}),
+  });
+  const statsQuery = usePrintInvitationStats();
 
-      const params: Record<string, string | number | boolean> = {
-        page,
-        limit,
-      };
-
-      if (search) {
-        params.search = search;
-      }
-
-      if (hasConfigFilter !== 'all') {
-        params.hasConfig = hasConfigFilter === 'true';
-      }
-
-      const response = await getAllInvitations(params);
-      setInvitations(response.data.data);
-      setTotal(response.data.total);
-      setTotalPages(response.data.totalPages);
-    } catch {
-      setError('청첩장 목록을 불러오는데 실패했습니다.');
-    } finally {
-      setLoading(false);
-    }
-  }, [page, search, hasConfigFilter]);
-
-  useEffect(() => {
-    loadInvitations();
-  }, [loadInvitations]);
-
-  const loadStats = useCallback(async () => {
-    try {
-      const response = await getPrintInvitationStats();
-      setStats(response.data);
-    } catch {
-      // Failed to load stats
-    }
-  }, []);
-
-  useEffect(() => {
-    loadStats();
-  }, [loadStats]);
+  const invitations = invitationsQuery.data?.data.data ?? [];
+  const total = invitationsQuery.data?.data.total ?? 0;
+  const totalPages = invitationsQuery.data?.data.totalPages ?? 1;
+  // 통계 조회는 실패해도 목록 화면을 막지 않는다 (기존 동작 유지)
+  const stats = statsQuery.data?.data ?? null;
+  const loading = invitationsQuery.isPending;
+  const error = invitationsQuery.isError ? '청첩장 목록을 불러오는데 실패했습니다.' : null;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

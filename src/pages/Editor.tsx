@@ -88,6 +88,9 @@ export default function Editor() {
   useEffect(() => {
     if (invitation) {
       const weddingDate = new Date(invitation.weddingDate);
+      // 조회한 청첩장을 편집용 폼 상태로 복사하는 구간이다.
+      // 규칙을 지키려면 폼 상태 관리 방식 자체를 바꿔야 해 별도 작업으로 남긴다.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setWeddingDateValue(weddingDate);
 
       setFormData({
