@@ -183,20 +183,19 @@ export function PreviewMapBlock({
   theme: ThemeStyles;
 }) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // 이미 스크립트가 있으면 초기값으로 반영해 effect에서 setState하지 않는다
+  const [isLoaded, setIsLoaded] = useState(() => Boolean(window.naver?.maps));
 
   useEffect(() => {
     // Load Naver Maps script
-    if (!window.naver?.maps) {
-      const script = document.createElement('script');
-      script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${import.meta.env.VITE_NAVER_MAP_CLIENT_ID}`;
-      script.async = true;
-      script.onload = () => setIsLoaded(true);
-      document.head.appendChild(script);
-    } else {
-      setIsLoaded(true);
-    }
-  }, []);
+    if (isLoaded) {return;}
+
+    const script = document.createElement('script');
+    script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${import.meta.env.VITE_NAVER_MAP_CLIENT_ID}`;
+    script.async = true;
+    script.onload = () => setIsLoaded(true);
+    document.head.appendChild(script);
+  }, [isLoaded]);
 
   useEffect(() => {
     if (!isLoaded || !mapRef.current || !window.naver?.maps || !venueLat || !venueLng) {return;}
