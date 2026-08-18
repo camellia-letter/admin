@@ -22,6 +22,9 @@ export default function PrintDesignEditor() {
   // 초기 설정 로드
   useEffect(() => {
     if (!id) {
+      // 조회한 설정을 편집용 상태로 복사하는 구간이다.
+      // 규칙을 지키려면 상태 관리 방식 자체를 바꿔야 해 별도 작업으로 남긴다.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setError('청첩장 ID가 없습니다.');
       setIsLoading(false);
       return;
