@@ -175,9 +175,9 @@ export default InvitationCard;
 
 ## 작업 후
 
-- `pnpm typecheck`
-- `pnpm lint`
-- `pnpm test`
+- `npm run typecheck`
+- `npm run lint`
+- `npm run test`
 
 ---
 
